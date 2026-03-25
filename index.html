@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelBooker Sri Lanka – Coastal Tours</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav class="navbar" id="navbar">
+  <a class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-icon">✈</div>
+    <div>
+      <span class="nav-logo-text">TravelBooker</span>
+      <span class="nav-logo-sub">Coastal Tours · Sri Lanka</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
+    <button class="nav-link" onclick="showPage('destinations')" id="nav-destinations">Destinations</button>
+    <button class="nav-link" onclick="showPage('packages')" id="nav-packages">Packages</button>
+    <button class="nav-link" onclick="showPage('about')" id="nav-about">About Us</button>
+    <button class="nav-link" onclick="showPage('support')" id="nav-support">Support</button>
+    <div class="nav-divider"></div>
+    <div class="currency-toggle">
+      <button class="currency-btn active" id="btn-usd" onclick="setCurrency('USD')">$ USD</button>
+      <button class="currency-btn" id="btn-lkr" onclick="setCurrency('LKR')">₨ LKR</button>
+    </div>
+    <div id="authButtons">
+      <button class="btn-nav-login" onclick="showPage('login')">Log In</button>
+      <button class="btn-nav-signup" onclick="showPage('signup')">Sign Up</button>
+    </div>
+    <div id="userMenu" style="display:none">
+      <div class="user-menu-btn" onclick="showPage('profile')">
+        <div class="user-avatar" id="navAvatarInitial">U</div>
+        <span id="navUserName">User</span>
+        <i class="fas fa-chevron-down" style="font-size:10px;opacity:0.6"></i>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================== HOME PAGE ======================== -->
+<div class="page active" id="page-home">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🌴 Sri Lanka's Premier Booking Platform</div>
+      <h1 class="hero-title">Discover <em class="accent">Paradise</em><br>in Sri Lanka</h1>
+      <p class="hero-subtitle">From misty highlands to golden shores — find and book handpicked hotels, villas, and resorts across the Pearl of the Indian Ocean.</p>
+      <!-- Search Bar -->
+      <div class="hero-search">
+        <div class="hero-search-field">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <label>Destination</label>
+            <select id="heroDestSelect" style="min-width:140px">
+              <option value="">All Sri Lanka</option>
+              <option>Colombo</option><option>Kandy</option><option>Nuwara Eliya</option>
+              <option>Galle</option><option>Mirissa</option><option>Weligama</option>
+              <option>Ella</option><option>Sigiriya</option><option>Jaffna</option>
+              <option>Trincomalee</option><option>Arugam Bay</option><option>Yala</option>
+              <option>Hikkaduwa</option><option>Polonnaruwa</option><option>Bentota</option><option>Unawatuna</option>
+            </select>
+          </div>
+        </div>
+        <div class="hero-search-field">
+          <i class="fas fa-calendar-check"></i>
+          <div>
+            <label>Check-in</label>
+            <input type="date" id="heroCheckin" min="">
+          </div>
+        </div>
+        <div class="hero-search-field">
+          <i class="fas fa-calendar-times"></i>
+          <div>
+            <label>Check-out</label>
+            <input type="date" id="heroCheckout">
+          </div>
+        </div>
+        <div class="hero-search-field">
+          <i class="fas fa-users"></i>
+          <div>
+            <label>Guests</label>
+            <select id="heroGuests" style="min-width:100px">
+              <option value="1">1 Guest</option><option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option><option value="4">4 Guests</option><option value="5">5 Guests</option><option value="6">6+ Guests</option>
+            </select>
+          </div>
+        </div>
+        <button class="hero-search-btn" onclick="showPage('destinations')">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">500+</span><span class="hero-stat-label">Premium Properties</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">25+</span><span class="hero-stat-label">Destinations</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">50K+</span><span class="hero-stat-label">Happy Guests</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">4.9★</span><span class="hero-stat-label">Average Rating</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll" onclick="document.getElementById('destSection').scrollIntoView({behavior:'smooth'})">
+      <span>Explore</span><i class="fas fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <!-- Destination Tiles -->
+  <section class="destinations-section" id="destSection">
+    <div class="section-header">
+      <div class="section-tag">🗺 Explore Sri Lanka</div>
+      <h2 class="section-title">Choose Your <em>Perfect Escape</em></h2>
+      <p class="section-desc">From the ancient city of Kandy to the surf paradise of Weligama — every corner of Sri Lanka holds a story. Hover to discover.</p>
+    </div>
+    <div class="dest-grid" id="destTilesGrid"></div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <div class="section-header">
+      <div class="section-tag">Why TravelBooker</div>
+      <h2 class="section-title" style="color:white">Everything You Need,<br><em>Nothing You Don't</em></h2>
+      <p class="section-desc">Built for modern travellers, corporate partners, and travel agents alike.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(11,110,79,0.15)"><span>🔒</span></div>
+        <div class="feature-title">Secure Booking</div>
+        <div class="feature-desc">Bank-grade encryption and two-factor authentication keeps your data and payments safe.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(201,168,76,0.12)"><span>💸</span></div>
+        <div class="feature-title">Dual Currency</div>
+        <div class="feature-desc">Book and pay in USD or Sri Lankan Rupees (LKR). Live exchange rates for full transparency.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(224,90,64,0.12)"><span>🏆</span></div>
+        <div class="feature-title">Loyalty Rewards</div>
+        <div class="feature-desc">Earn points on every stay. Loyal members unlock exclusive discounts and early access to deals.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(99,102,241,0.12)"><span>🤝</span></div>
+        <div class="feature-title">B2B & B2C</div>
+        <div class="feature-desc">Individual travellers, families, corporate clients, and travel agents — all in one platform.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(34,197,94,0.12)"><span>🤖</span></div>
+        <div class="feature-title">AI Assistant</div>
+        <div class="feature-desc">Our smart chatbot helps you find the perfect property, answers questions, and guides your booking.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(59,130,246,0.12)"><span>📱</span></div>
+        <div class="feature-title">24/7 Support</div>
+        <div class="feature-desc">Round-the-clock multilingual support via phone, email, and live chat. We're always here for you.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews-section">
+    <div class="section-header">
+      <div class="section-tag">Guest Stories</div>
+      <h2 class="section-title">What Travellers <em>Are Saying</em></h2>
+      <p class="section-desc">Real experiences from real guests who fell in love with Sri Lanka through TravelBooker.</p>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+    <div class="add-review-section">
+      <div class="add-review-btn-wrap">
+        <button class="btn-add-review" onclick="toggleReviewForm()">
+          <i class="fas fa-pen"></i> Share Your Experience
+        </button>
+      </div>
+      <div class="review-form-card" id="reviewFormCard">
+        <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:4px">Write a Review</h3>
+        <p style="font-size:14px;color:var(--text-light);margin-bottom:24px">Your story helps other travellers make great choices.</p>
+        <div style="margin-bottom:16px">
+          <label class="form-label">Your Rating</label>
+          <div class="star-rating" id="starRating">
+            <i class="fas fa-star" data-val="1"></i>
+            <i class="fas fa-star" data-val="2"></i>
+            <i class="fas fa-star" data-val="3"></i>
+            <i class="fas fa-star" data-val="4"></i>
+            <i class="fas fa-star" data-val="5"></i>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-user"></i>
+            <input class="form-input" placeholder="e.g. Sarah M." id="reviewName">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Where are you from?</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-globe"></i>
+            <input class="form-input" placeholder="e.g. London, UK" id="reviewOrigin">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Property Visited</label>
+          <select class="form-select" id="reviewHotel">
+            <option>Cinnamon Grand Colombo</option>
+            <option>Heritance Kandalama</option>
+            <option>Amanwella Tangalle</option>
+            <option>The Dutch House Galle</option>
+            <option>Jetwing Surf Arugam Bay</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Experience</label>
+          <textarea class="form-textarea" placeholder="Tell us about your stay — the people, the views, the food…" id="reviewText"></textarea>
+        </div>
+        <button class="btn-submit" onclick="submitReview()">Publish My Review <i class="fas fa-paper-plane" style="margin-left:8px"></i></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================== DESTINATIONS PAGE ======================== -->
+<div class="page" id="page-destinations">
+  <div class="dest-page-container">
+    <div class="breadcrumb">
+      <span class="breadcrumb-item" onclick="showPage('home')">Home</span>
+      <i class="fas fa-chevron-right"></i>
+      <span class="breadcrumb-item active">Destinations</span>
+    </div>
+    <div class="dest-page-header">
+      <h1 class="dest-page-title">Hotels & Resorts in <em>Sri Lanka</em></h1>
+      <p class="dest-page-subtitle" id="destPageSubtitle">Showing all available properties across Sri Lanka</p>
+    </div>
+    <div class="dest-page-layout">
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-title">
+          Filters <span class="filter-clear" onclick="clearFilters()">Clear All</span>
+        </div>
+        <!-- Star Rating -->
+        <div class="filter-section">
+          <div class="filter-section-title">Star Rating</div>
+          <div class="star-filter">
+            <label class="star-check"><input type="checkbox" value="5"><span class="star-check-label"><span class="stars">★★★★★</span> 5 Stars</span></label>
+            <label class="star-check"><input type="checkbox" value="4"><span class="star-check-label"><span class="stars">★★★★</span>☆ 4 Stars</span></label>
+            <label class="star-check"><input type="checkbox" value="3"><span class="star-check-label"><span class="stars">★★★</span>☆☆ 3 Stars</span></label>
+            <label class="star-check"><input type="checkbox" value="2"><span class="star-check-label"><span class="stars">★★</span>☆☆☆ 2 Stars</span></label>
+          </div>
+        </div>
+        <!-- Price Range -->
+        <div class="filter-section">
+          <div class="filter-section-title">Price per Night</div>
+          <div class="price-range-wrap">
+            <div class="price-range-labels"><span id="priceMin">$0</span><span id="priceMax">$1,000+</span></div>
+            <input type="range" class="price-slider" id="priceRange" min="0" max="1000" value="600" oninput="updatePrice(this.value)">
+            <div class="price-display">Up to <span id="priceDisplay">$600</span></div>
+          </div>
+        </div>
+        <!-- Discounts -->
+        <div class="filter-section">
+          <div class="filter-section-title">Special Offers</div>
+          <div class="discount-checks">
+            <label class="discount-check"><input type="checkbox"><span>🏷 Special Discount</span></label>
+            <label class="discount-check"><input type="checkbox"><span>💳 Card Payment Discount</span></label>
+            <label class="discount-check"><input type="checkbox"><span>👑 Loyalty Member Deal</span></label>
+            <label class="discount-check"><input type="checkbox"><span>🌙 Early Bird Offer</span></label>
+          </div>
+        </div>
+        <!-- Amenities -->
+        <div class="filter-section">
+          <div class="filter-section-title">Amenities</div>
+          <div class="amenities-grid">
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">📶 WiFi</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🏊 Pool</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🅿 Parking</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">💆 Spa</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🏋 Gym</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🍽 Restaurant</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🌊 Beachfront</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🔑 Concierge</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🚗 Airport TX</span></label>
+            <label class="amenity-check"><input type="checkbox"><span class="amenity-label">🐾 Pet Friendly</span></label>
+          </div>
+        </div>
+        <!-- Property Type -->
+        <div class="filter-section">
+          <div class="filter-section-title">Property Type</div>
+          <div class="discount-checks">
+            <label class="discount-check"><input type="checkbox" checked><span>🏨 Hotel</span></label>
+            <label class="discount-check"><input type="checkbox" checked><span>🏡 Villa</span></label>
+            <label class="discount-check"><input type="checkbox" checked><span>🌿 Resort</span></label>
+            <label class="discount-check"><input type="checkbox"><span>🏖 Boutique</span></label>
+          </div>
+        </div>
+        <!-- Guest Rating -->
+        <div class="filter-section" style="border-bottom:none;margin-bottom:0;padding-bottom:0">
+          <div class="filter-section-title">Guest Rating</div>
+          <div class="discount-checks">
+            <label class="discount-check"><input type="radio" name="guestRating"><span>⭐ Exceptional (9+)</span></label>
+            <label class="discount-check"><input type="radio" name="guestRating"><span>⭐ Wonderful (8+)</span></label>
+            <label class="discount-check"><input type="radio" name="guestRating"><span>⭐ Good (7+)</span></label>
+          </div>
+        </div>
+      </aside>
+      <!-- Hotel Listings -->
+      <div>
+        <div class="dest-results-header">
+          <span class="results-count"><strong id="hotelCount">12</strong> properties found</span>
+          <select class="sort-select" id="sortSelect" onchange="sortHotels()">
+            <option>Sort: Recommended</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Star Rating</option>
+            <option>Guest Rating</option>
+          </select>
+        </div>
+        <div class="hotel-cards" id="hotelCards"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== HOTEL DETAIL PAGE ======================== -->
+<div class="page" id="page-hotel-detail" style="overflow-x:hidden">
+  <div class="detail-page">
+    <div class="detail-hero" id="detailHeroSection">
+      <img class="detail-hero-img" id="detailHeroImg" src="" alt="">
+      <div class="detail-hero-overlay"></div>
+      <div class="detail-hero-info">
+        <div>
+          <div class="hotel-card-stars" id="detailStars">★★★★★</div>
+          <div class="detail-hotel-name" id="detailHotelName">Hotel Name</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:4px">
+            <div class="detail-hotel-location"><i class="fas fa-map-marker-alt" style="color:var(--coral)"></i><span id="detailHotelLocation">Location, Sri Lanka</span></div>
+            <a id="detailMapsLink" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:white;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;text-decoration:none;transition:background 0.2s" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'"><i class="fas fa-map-marker-alt" style="color:#E05A40"></i> Google Maps</a>
+          </div>
+        </div>
+        <div class="detail-price-block">
+          <div class="detail-price" id="detailPriceHero">$0</div>
+          <div class="detail-price-label">per night · taxes incl.</div>
+          <div style="margin-top:8px"><span class="rating-score" id="detailRatingScore">9.2</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="detail-content">
+      <div class="detail-main">
+        <button class="back-btn" onclick="showPage('destinations')"><i class="fas fa-arrow-left"></i> Back to Destinations</button>
+        <h2 class="detail-section-title">About This Property</h2>
+        <p class="detail-desc" id="detailDesc"></p>
+        <h2 class="detail-section-title">Amenities & Facilities</h2>
+        <div class="detail-amenities-grid" id="detailAmenities"></div>
+        <h2 class="detail-section-title">Room Gallery</h2>
+        <div class="room-gallery" id="detailRoomGallery"></div>
+        <h2 class="detail-section-title">Upcoming Events & Activities</h2>
+        <div class="events-list" id="detailEvents"></div>
+        <h2 class="detail-section-title">Guest Reviews</h2>
+        <div class="reviews-grid" id="detailReviews" style="margin-bottom:0"></div>
+      </div>
+      <!-- Booking Sidebar -->
+      <div class="detail-sidebar">
+        <div class="booking-card">
+          <div class="booking-card-title">Book Your Stay</div>
+          <div id="bookingNotLoggedMsg" class="not-logged-msg" style="display:none"><i class="fas fa-info-circle"></i> Please <span style="font-weight:700;text-decoration:underline;cursor:pointer" onclick="showPage('login')">log in</span> or <span style="font-weight:700;text-decoration:underline;cursor:pointer" onclick="showPage('signup')">sign up</span> to book.</div>
+          <div class="date-picker-row">
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label">Check-in</label>
+              <input type="date" class="form-input" id="bookCheckin">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label">Check-out</label>
+              <input type="date" class="form-input" id="bookCheckout">
+            </div>
+          </div>
+          <div style="margin-top:14px">
+            <label class="form-label">Rooms</label>
+            <select class="form-select" id="bookRooms" onchange="updateBookingSummary()">
+              <option value="1">1 Room</option><option value="2">2 Rooms</option>
+              <option value="3">3 Rooms</option><option value="4">4 Rooms</option>
+            </select>
+          </div>
+          <div style="margin-top:14px">
+            <label class="form-label">Guests</label>
+            <select class="form-select" id="bookGuests">
+              <option>1 Guest</option><option selected>2 Guests</option>
+              <option>3 Guests</option><option>4 Guests</option>
+              <option>5 Guests</option><option>6+ Guests</option>
+            </select>
+          </div>
+          <!-- Package based on user type -->
+          <div style="margin-top:14px" id="packageSection">
+            <label class="form-label">Package</label>
+            <select class="form-select" id="bookPackage">
+              <option>Room Only</option>
+              <option>Bed & Breakfast</option>
+              <option>Half Board</option>
+              <option selected>Full Board</option>
+            </select>
+          </div>
+          <!-- Loyalty number -->
+          <!-- Guests -->
+          <div class="form-group" style="margin-top:14px">
+            <label class="form-label" style="font-size:13px">Number of Guests</label>
+            <select class="form-select" id="bookGuests" onchange="checkCorporateFields()">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="5">5 Guests</option>
+              <option value="6">6+ Guests (Group)</option>
+            </select>
+          </div>
+          <!-- Travel Agent request -->
+          <div style="margin-top:12px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text-mid)">
+              <input type="checkbox" id="bookRequestAgent" style="accent-color:var(--deep-teal)" onchange="toggleBookingAgent()">
+              Book through a Travel Agent
+            </label>
+            <div id="bookAgentSelectWrap" style="display:none;margin-top:10px">
+              <select class="form-select" id="bookAgentSelect" style="font-size:13px">
+                <option value="">— Select a registered agent —</option>
+                <option value="TA-00123">🏢 Jetwing Travels (TA-00123)</option>
+                <option value="TA-00245">🏢 Aitken Spence Tours (TA-00245)</option>
+                <option value="TA-00389">🏢 Walkers Tours (TA-00389)</option>
+                <option value="TA-00412">🏢 Ceylon Holidays (TA-00412)</option>
+                <option value="TA-00557">🏢 Red Dot Tours (TA-00557)</option>
+              </select>
+              <p style="font-size:11px;color:var(--text-light);margin-top:6px">Your agent will receive booking details and may contact you directly.</p>
+            </div>
+          </div>
+          <!-- Corporate employee names -->
+          <div id="corporateGuestWrap" style="display:none;margin-top:12px">
+            <label class="form-label" style="font-size:13px">Employee / Traveller Names</label>
+            <textarea class="form-textarea" id="corporateGuestNames" placeholder="e.g. John Smith, Mary Wong, Priya Nair…" style="min-height:60px;font-size:13px"></textarea>
+          </div>
+          <div class="loyalty-input-wrap" style="margin-top:14px">
+            <label class="form-label">Loyalty Member Number <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-crown" style="color:var(--gold)"></i>
+              <input class="form-input" placeholder="e.g. LYL-2024-00123" id="loyaltyNumber" style="padding-left:42px" oninput="applyLoyaltyDiscount()">
+            </div>
+            <div class="loyalty-hint">Loyalty members get up to 15% off</div>
+          </div>
+          <div class="booking-summary" id="bookingSummary">
+            <div class="summary-row"><span>1 Room × 3 nights</span><span id="summarySubtotal">$450</span></div>
+            <div class="summary-row"><span>Taxes & Fees (10%)</span><span id="summaryTax">$45</span></div>
+            <div class="summary-row" id="loyaltyDiscountRow" style="display:none;color:var(--deep-teal)"><span>👑 Loyalty Discount</span><span id="summaryDiscount">-$0</span></div>
+            <div class="summary-row total"><span>Total</span><span id="summaryTotal">$495</span></div>
+          </div>
+          <button class="btn-book-now" onclick="proceedToBook()">Book Now <i class="fas fa-arrow-right" style="margin-left:6px"></i></button>
+          <p class="book-small-note"><i class="fas fa-shield-alt" style="color:var(--deep-teal)"></i> Free cancellation up to 48 hrs before check-in</p>
+        </div>
+        <!-- Discounts panel based on user type -->
+        <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:20px;box-shadow:var(--shadow-sm)" id="discountPanel">
+          <div style="font-weight:700;font-size:14px;color:var(--text-dark);margin-bottom:14px">🏷 Available Discounts</div>
+          <div id="discountList" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== LOGIN PAGE ======================== -->
+<div class="page" id="page-login">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">✈ TravelBooker</div>
+        <h2 class="auth-title" id="loginTitle">Welcome Back</h2>
+        <p class="auth-subtitle" id="loginSubtitle">Sign in to continue your journey</p>
+      </div>
+      <!-- Login type tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchLoginType('personal')" id="tab-personal">Personal / B2C</button>
+        <button class="auth-tab" onclick="switchLoginType('corporate')" id="tab-corporate">Corporate Partner</button>
+        <button class="auth-tab" onclick="switchLoginType('agent')" id="tab-agent">Travel Agent</button>
+      </div>
+
+      <!-- Step 1: Credentials -->
+      <div id="loginStep1">
+        <div class="step-indicator">
+          <div class="step-dot active" id="ls1"></div>
+          <div class="step-dot" id="ls2"></div>
+          <div class="step-dot" id="ls3"></div>
+        </div>
+        <!-- Personal fields -->
+        <div id="personalLoginFields">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-envelope"></i>
+              <input class="form-input" type="email" placeholder="your@email.com" id="loginEmail">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-lock"></i>
+              <input class="form-input" type="password" placeholder="Enter your password" id="loginPassword">
+              <button class="toggle-pw" onclick="togglePasswordVisibility('loginPassword')"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--deep-teal)"> Remember me</label>
+            <a style="font-size:13px;color:var(--deep-teal);cursor:pointer;font-weight:600">Forgot Password?</a>
+          </div>
+        </div>
+        <!-- Corporate fields -->
+        <div id="corporateLoginFields" style="display:none">
+          <div class="form-group">
+            <label class="form-label">Corporate Email</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-building"></i>
+              <input class="form-input" type="email" placeholder="name@company.com" id="corpEmail">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company Account Number</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-id-card"></i>
+              <input class="form-input" placeholder="CRP-XXXXX" id="corpAccountNo">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-lock"></i>
+              <input class="form-input" type="password" placeholder="Enter password" id="corpPassword">
+              <button class="toggle-pw" onclick="togglePasswordVisibility('corpPassword')"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+        </div>
+        <!-- Agent fields -->
+        <div id="agentLoginFields" style="display:none">
+          <div style="background:var(--light-teal);border-radius:var(--radius);padding:14px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start">
+            <i class="fas fa-info-circle" style="color:var(--deep-teal);margin-top:2px"></i>
+            <p style="font-size:13px;color:var(--deep-teal)">Travel agents have a dedicated portal. Please use your registered travel agent number to log in.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Travel Agent Number</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-id-badge"></i>
+              <input class="form-input" placeholder="TA-XXXXX-XXXX" id="agentNumber" style="padding-left:42px">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-lock"></i>
+              <input class="form-input" type="password" placeholder="Agent portal password" id="agentPassword">
+              <button class="toggle-pw" onclick="togglePasswordVisibility('agentPassword')"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Agency Name</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-briefcase"></i>
+              <input class="form-input" placeholder="Your travel agency name" id="agentAgencyName">
+            </div>
+          </div>
+        </div>
+        <!-- CAPTCHA -->
+        <div class="form-group">
+          <div class="captcha-box" id="captchaBox" onclick="verifyCaptcha()">
+            <div class="captcha-check" id="captchaCheck"></div>
+            <span class="captcha-label" id="captchaLabel">I am not a robot</span>
+            <div class="captcha-logo">
+              <strong>CLOUDFLARE</strong>
+              Turnstile
+            </div>
+          </div>
+        </div>
+        <button class="btn-submit" onclick="proceedLoginStep2()">Continue <i class="fas fa-arrow-right" style="margin-left:6px"></i></button>
+        <div class="auth-divider">or</div>
+        <div style="display:flex;gap:10px;margin-bottom:20px">
+          <button style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius);background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-family:var(--font-body);transition:all 0.2s" onmouseover="this.style.borderColor='var(--deep-teal)'" onmouseout="this.style.borderColor='var(--border)'">
+            <img src="https://www.google.com/favicon.ico" width="18" alt="Google"> Google
+          </button>
+          <button style="flex:1;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius);background:#1877F2;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;color:white;font-family:var(--font-body)">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+        <p style="text-align:center;font-size:14px;color:var(--text-light)">New to TravelBooker? <span style="color:var(--deep-teal);font-weight:600;cursor:pointer" onclick="showPage('signup')">Create an account</span></p>
+      </div>
+
+      <!-- Step 2: 2FA Email Verification -->
+      <div id="loginStep2" style="display:none">
+        <div class="step-indicator">
+          <div class="step-dot done" id="ls1b"></div>
+          <div class="step-dot active" id="ls2b"></div>
+          <div class="step-dot" id="ls3b"></div>
+        </div>
+        <div style="text-align:center;margin-bottom:28px">
+          <div style="width:72px;height:72px;background:var(--light-teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 16px">📧</div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:8px">Check Your Email</h3>
+          <p style="font-size:14px;color:var(--text-light)">We sent a 6-digit verification code to<br><strong id="loginEmailDisplay" style="color:var(--text-dark)">your@email.com</strong></p>
+        </div>
+        <div class="otp-inputs" id="loginOtpInputs">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 0, 'loginOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 1, 'loginOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 2, 'loginOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 3, 'loginOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 4, 'loginOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 5, 'loginOtp')">
+        </div>
+        <p style="text-align:center;font-size:13px;color:var(--text-light);margin-bottom:20px">Code expires in <strong style="color:var(--text-dark)" id="otpTimer">02:00</strong> · <span style="color:var(--deep-teal);cursor:pointer;font-weight:600">Resend Code</span></p>
+        <button class="btn-submit" onclick="completeLogin()">Verify & Log In <i class="fas fa-shield-alt" style="margin-left:6px"></i></button>
+        <button style="width:100%;padding:12px;background:none;border:none;color:var(--text-light);font-size:14px;cursor:pointer;margin-top:10px;font-family:var(--font-body)" onclick="document.getElementById('loginStep1').style.display='block';document.getElementById('loginStep2').style.display='none'">← Go Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== SIGN UP PAGE ======================== -->
+<div class="page" id="page-signup">
+  <div class="auth-page">
+    <div class="auth-card" style="max-width:560px">
+      <div class="auth-header">
+        <div class="auth-logo">✈ TravelBooker</div>
+        <h2 class="auth-title">Create Your Account</h2>
+        <p class="auth-subtitle">Join thousands of travellers exploring Sri Lanka</p>
+      </div>
+      <div class="step-indicator">
+        <div class="step-dot active" id="ss1"></div>
+        <div class="step-dot" id="ss2"></div>
+        <div class="step-dot" id="ss3"></div>
+      </div>
+      <!-- Step 1: Profile -->
+      <div id="signupStep1">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-user"></i>
+              <input class="form-input" placeholder="First name" id="suFirstName">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" placeholder="Last name" id="suLastName">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-envelope"></i>
+            <input class="form-input" type="email" placeholder="your@email.com" id="suEmail">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-phone"></i>
+            <input class="form-input" placeholder="+94 XX XXX XXXX" id="suPhone">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">I am a...</label>
+          <select class="form-select" id="suUserType" onchange="showUserTypeFields()">
+            <option value="">— Select your profile —</option>
+            <option value="tourist">🌴 Tourist / Leisure Traveller</option>
+            <option value="family">👨‍👩‍👧 Family Traveller</option>
+            <option value="solo">🎒 Solo Traveller</option>
+            <option value="business">💼 Business Traveller</option>
+            <option value="honeymoon">💑 Honeymooner / Couple</option>
+            <option value="student">🎓 Student</option>
+            <option value="teacher">📚 Teacher / Lecturer</option>
+            <option value="freelancer">💻 Freelancer / Remote Worker</option>
+            <option value="blogger">📸 Travel Blogger / Influencer</option>
+            <option value="group">👥 Group Travel Organiser</option>
+            <option value="corporate">🏢 Corporate Partner</option>
+            <option value="travel_agent">🧳 Travel Agent</option>
+            <option value="other">✨ Other</option>
+          </select>
+        </div>
+        <!-- Dynamic fields based on user type -->
+        <div id="userTypeExtra" style="display:none">
+          <div class="form-group" id="studentFieldWrap" style="display:none">
+            <label class="form-label">Student ID / University</label>
+            <input class="form-input" placeholder="University name or student ID" id="suStudentId">
+          </div>
+          <div class="form-group" id="businessFieldWrap" style="display:none">
+            <label class="form-label">Company Name</label>
+            <input class="form-input" placeholder="Your company name" id="suCompany">
+          </div>
+          <div class="form-group" id="groupFieldWrap" style="display:none">
+            <label class="form-label">Estimated Group Size</label>
+            <select class="form-select" id="suGroupSize">
+              <option>10–20 people</option><option>21–50 people</option><option>51–100 people</option><option>100+ people</option>
+            </select>
+          </div>
+          <div class="form-group" id="corporateFieldWrap" style="display:none">
+            <label class="form-label">Company / Organisation Name</label>
+            <input class="form-input" placeholder="Your company or organisation" id="suCompany">
+          </div>
+          <div class="form-group" id="corporateRegWrap" style="display:none">
+            <label class="form-label">Business Registration No. <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+            <input class="form-input" placeholder="e.g. PV 12345" id="suCorpReg">
+          </div>
+          <div class="form-group" id="agentFieldWrap" style="display:none">
+            <label class="form-label">Agency Name</label>
+            <input class="form-input" placeholder="Your travel agency name" id="suAgencyName">
+          </div>
+          <div class="form-group" id="agentNumWrap" style="display:none">
+            <label class="form-label">Travel Agent Number <span style="font-weight:400;color:var(--text-light)">(if registered)</span></label>
+            <input class="form-input" placeholder="TA-XXXXX" id="suAgentNum">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nationality</label>
+          <select class="form-select" id="suNationality">
+            <option value="">Select country</option>
+            <option>Sri Lanka</option><option>United Kingdom</option>
+            <option>United States</option><option>India</option>
+            <option>Australia</option><option>Germany</option>
+            <option>France</option><option>China</option>
+            <option>Japan</option><option>Canada</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button class="btn-submit" onclick="signupNextStep()">Continue <i class="fas fa-arrow-right" style="margin-left:6px"></i></button>
+        <p style="text-align:center;font-size:14px;color:var(--text-light);margin-top:16px">Already have an account? <span style="color:var(--deep-teal);font-weight:600;cursor:pointer" onclick="showPage('login')">Log in</span></p>
+      </div>
+
+      <!-- Step 2: Password + CAPTCHA -->
+      <div id="signupStep2" style="display:none">
+        <div class="form-group">
+          <label class="form-label">Create Password</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-lock"></i>
+            <input class="form-input" type="password" placeholder="Min. 8 characters" id="suPassword">
+            <button class="toggle-pw" onclick="togglePasswordVisibility('suPassword')"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-lock"></i>
+            <input class="form-input" type="password" placeholder="Repeat password" id="suConfirmPassword">
+            <button class="toggle-pw" onclick="togglePasswordVisibility('suConfirmPassword')"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <!-- Password strength indicator -->
+        <div style="margin-bottom:20px">
+          <div style="display:flex;gap:6px;margin-bottom:6px">
+            <div style="flex:1;height:4px;border-radius:2px;background:var(--border)" id="pwStr1"></div>
+            <div style="flex:1;height:4px;border-radius:2px;background:var(--border)" id="pwStr2"></div>
+            <div style="flex:1;height:4px;border-radius:2px;background:var(--border)" id="pwStr3"></div>
+            <div style="flex:1;height:4px;border-radius:2px;background:var(--border)" id="pwStr4"></div>
+          </div>
+          <span style="font-size:12px;color:var(--text-light)" id="pwStrLabel">Enter a password</span>
+        </div>
+        <div class="form-group">
+          <div class="captcha-box" id="captchaBox2" onclick="verifyCaptcha2()">
+            <div class="captcha-check" id="captchaCheck2"></div>
+            <span class="captcha-label" id="captchaLabel2">I am not a robot</span>
+            <div class="captcha-logo"><strong>CLOUDFLARE</strong>Turnstile</div>
+          </div>
+        </div>
+        <div style="margin-bottom:20px;background:var(--cream);border-radius:var(--radius);padding:14px">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text-mid);line-height:1.7">
+            <input type="checkbox" id="suTerms" style="accent-color:var(--deep-teal);margin-top:3px;flex-shrink:0;width:15px;height:15px">
+            <span>I agree to TravelBooker's <a style="color:var(--deep-teal);font-weight:600;text-decoration:underline">Terms of Service</a> and <a style="color:var(--deep-teal);font-weight:600;text-decoration:underline">Privacy Policy</a>. I consent to receiving booking confirmations and relevant travel communications by email.</span>
+          </label>
+        </div>
+        <button class="btn-submit" onclick="signupFinalStep()">Create Account & Verify Email <i class="fas fa-envelope" style="margin-left:6px"></i></button>
+        <button style="width:100%;padding:12px;background:none;border:none;color:var(--text-light);font-size:14px;cursor:pointer;margin-top:10px;font-family:var(--font-body)" onclick="document.getElementById('signupStep1').style.display='block';document.getElementById('signupStep2').style.display='none';updateStepDot('ss',1)">← Back</button>
+      </div>
+
+      <!-- Step 3: Email Verification -->
+      <div id="signupStep3" style="display:none">
+        <div style="text-align:center;margin-bottom:28px">
+          <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--light-teal),var(--cream));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px">📬</div>
+          <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:8px">Verify Your Email</h3>
+          <p style="font-size:14px;color:var(--text-light)">We sent a 6-digit code to<br><strong id="signupEmailDisplay" style="color:var(--text-dark)">your@email.com</strong></p>
+        </div>
+        <div class="otp-inputs">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 0, 'signupOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 1, 'signupOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 2, 'signupOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 3, 'signupOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 4, 'signupOtp')">
+          <input class="otp-input" maxlength="1" oninput="moveOtp(this, 5, 'signupOtp')">
+        </div>
+        <p style="text-align:center;font-size:13px;color:var(--text-light);margin-bottom:20px">Didn't receive it? <span style="color:var(--deep-teal);cursor:pointer;font-weight:600">Resend Code</span></p>
+        <button class="btn-submit" onclick="completeSignup()">Verify & Activate Account 🎉</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== ABOUT US PAGE ======================== -->
+<div class="page" id="page-about">
+  <div class="page-container">
+    <!-- Hero -->
+    <section style="background:linear-gradient(135deg,var(--navy) 0%,#0B3D2B 50%,#0B6E4F 100%);padding:100px 40px 80px;text-align:center;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=70') center/cover;opacity:0.15"></div>
+      <div style="position:relative;z-index:1">
+        <div class="section-tag" style="background:rgba(201,168,76,0.15);color:var(--gold)">About Us</div>
+        <h1 style="font-family:var(--font-display);font-size:clamp(40px,6vw,72px);font-weight:700;color:white;margin:16px 0 20px;line-height:1.1">Sri Lanka's Premier<br><em style="color:var(--gold);font-style:italic">Travel Booking Platform</em></h1>
+        <p style="font-size:18px;color:rgba(255,255,255,0.8);max-width:640px;margin:0 auto;line-height:1.8">TravelBooker connects travellers, travel agents, and hotels across Sri Lanka — making the pearl of the Indian Ocean more accessible than ever before.</p>
+      </div>
+    </section>
+
+    <!-- Stats band -->
+    <section style="background:var(--deep-teal);padding:40px">
+      <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center">
+        <div><div style="font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--gold)">500+</div><div style="color:rgba(255,255,255,0.75);font-size:14px;margin-top:4px">Partner Hotels</div></div>
+        <div><div style="font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--gold)">16</div><div style="color:rgba(255,255,255,0.75);font-size:14px;margin-top:4px">Destinations</div></div>
+        <div><div style="font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--gold)">50K+</div><div style="color:rgba(255,255,255,0.75);font-size:14px;margin-top:4px">Happy Travellers</div></div>
+        <div><div style="font-family:var(--font-display);font-size:42px;font-weight:700;color:var(--gold)">6</div><div style="color:rgba(255,255,255,0.75);font-size:14px;margin-top:4px">Years in Business</div></div>
+      </div>
+    </section>
+
+    <!-- Our story -->
+    <section style="background:white;padding:80px 40px">
+      <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+        <div>
+          <div class="section-tag">Our Story</div>
+          <h2 style="font-family:var(--font-display);font-size:clamp(28px,4vw,48px);font-weight:700;color:var(--text-dark);margin:16px 0 20px;line-height:1.2">Born from a Passion for <em style="color:var(--deep-teal)">Sri Lanka</em></h2>
+          <p style="font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:16px">TravelBooker was founded in 2020 as a product of <strong>CodeGen International</strong> — one of Sri Lanka's leading software companies. We saw a gap: Sri Lanka's extraordinary hotels and experiences were scattered across fragmented booking channels, making it difficult for travellers to discover and book the authentic island experiences they were seeking.</p>
+          <p style="font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:16px">Our platform was built to bridge that gap — bringing together boutique villas, world-class resorts, eco-lodges, and heritage properties into a single, beautifully designed booking experience tailored specifically for Sri Lanka.</p>
+          <p style="font-size:15px;color:var(--text-mid);line-height:1.8">Today, TravelBooker serves direct travellers, travel agents managing group itineraries, and corporate partners booking employee travel — all through one unified platform.</p>
+        </div>
+        <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)">
+          <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=700&q=80" alt="Sri Lanka" style="width:100%;height:420px;object-fit:cover">
+        </div>
+      </div>
+    </section>
+
+    <!-- What we do -->
+    <section style="background:var(--cream);padding:80px 40px">
+      <div style="max-width:1100px;margin:0 auto">
+        <div class="section-header">
+          <div class="section-tag">What We Do</div>
+          <h2 class="section-title">Everything You Need for <em>Sri Lanka Travel</em></h2>
+          <p class="section-desc">From your first search to your check-in and beyond, TravelBooker handles every step of your Sri Lanka journey.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px">
+          <div style="background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);text-align:center">
+            <div style="width:64px;height:64px;background:var(--light-teal);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px">🏨</div>
+            <div style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:10px">Hotel Booking</div>
+            <p style="font-size:14px;color:var(--text-light);line-height:1.7">Browse and book from 500+ handpicked hotels, villas, resorts, and boutique properties across 16 Sri Lankan destinations.</p>
+          </div>
+          <div style="background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);text-align:center">
+            <div style="width:64px;height:64px;background:rgba(201,168,76,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px">📦</div>
+            <div style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:10px">Tour Packages</div>
+            <p style="font-size:14px;color:var(--text-light);line-height:1.7">Curated packages for every traveller type — honeymoon escapes, family adventures, corporate retreats, and immersive cultural journeys.</p>
+          </div>
+          <div style="background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);text-align:center">
+            <div style="width:64px;height:64px;background:rgba(99,102,241,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px">🤝</div>
+            <div style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:10px">B2B Partnership</div>
+            <p style="font-size:14px;color:var(--text-light);line-height:1.7">Dedicated portals for travel agents and corporate partners — with trade pricing, group bookings, VAT invoicing, and commission structures.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who we serve -->
+    <section style="background:white;padding:80px 40px">
+      <div style="max-width:1100px;margin:0 auto">
+        <div class="section-header">
+          <div class="section-tag">Who We Serve</div>
+          <h2 class="section-title">Built for Every Type of <em>Traveller</em></h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:800px;margin:0 auto">
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--cream);border-radius:var(--radius-lg)">
+            <div style="font-size:32px;flex-shrink:0">🌴</div>
+            <div><div style="font-weight:700;margin-bottom:4px">Direct Customers</div><div style="font-size:13px;color:var(--text-light);line-height:1.6">Tourists, honeymooners, families, and solo travellers booking their own Sri Lanka adventure directly online.</div></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--cream);border-radius:var(--radius-lg)">
+            <div style="font-size:32px;flex-shrink:0">🧳</div>
+            <div><div style="font-weight:700;margin-bottom:4px">Travel Agents</div><div style="font-size:13px;color:var(--text-light);line-height:1.6">Professional agents managing group itineraries, client bookings, and bulk reservations with trade pricing and commission.</div></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--cream);border-radius:var(--radius-lg)">
+            <div style="font-size:32px;flex-shrink:0">🏢</div>
+            <div><div style="font-weight:700;margin-bottom:4px">Corporate Partners</div><div style="font-size:13px;color:var(--text-light);line-height:1.6">Companies booking employee travel, team retreats, and corporate events with dedicated account management and invoicing.</div></div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--cream);border-radius:var(--radius-lg)">
+            <div style="font-size:32px;flex-shrink:0">🏨</div>
+            <div><div style="font-weight:700;margin-bottom:4px">Hotel Partners</div><div style="font-size:13px;color:var(--text-light);line-height:1.6">Hotels, villas, and resorts loading their inventory, setting rates, and reaching millions of travellers through TravelBooker.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team / Company info -->
+    <section style="background:var(--cream);padding:80px 40px">
+      <div style="max-width:1100px;margin:0 auto">
+        <div class="section-header">
+          <div class="section-tag">Our Company</div>
+          <h2 class="section-title">Backed by <em>CodeGen International</em></h2>
+          <p class="section-desc">TravelBooker is a product of CodeGen International, a globally recognised technology company headquartered in Colombo, Sri Lanka, with a strong track record in travel technology.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;text-align:center">
+          <div style="background:white;padding:30px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)">
+            <div style="font-size:36px;margin-bottom:12px">🌍</div>
+            <div style="font-weight:700;font-size:16px;margin-bottom:8px">Global Reach</div>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.6">Serving customers from over 40 countries who choose Sri Lanka as their travel destination every year.</p>
+          </div>
+          <div style="background:white;padding:30px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)">
+            <div style="font-size:36px;margin-bottom:12px">🔒</div>
+            <div style="font-weight:700;font-size:16px;margin-bottom:8px">Secure & Trusted</div>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.6">256-bit SSL encryption, PCI-DSS compliant payment processing, and GDPR-aligned data protection standards.</p>
+          </div>
+          <div style="background:white;padding:30px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)">
+            <div style="font-size:36px;margin-bottom:12px">📞</div>
+            <div style="font-weight:700;font-size:16px;margin-bottom:8px">24/7 Support</div>
+            <p style="font-size:13px;color:var(--text-light);line-height:1.6">Our Sri Lanka-based team is available around the clock to assist with bookings, changes, and any queries.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--navy),#0B3D2B);padding:80px 40px;text-align:center">
+      <h2 style="font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:700;color:white;margin-bottom:16px">Ready to Explore <em style="color:var(--gold)">Sri Lanka?</em></h2>
+      <p style="font-size:17px;color:rgba(255,255,255,0.75);max-width:500px;margin:0 auto 36px;line-height:1.8">Browse our hotels, discover tour packages, or create your account and join 50,000+ happy travellers.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-book-now" style="width:auto;padding:16px 36px;font-size:16px" onclick="showPage('destinations')"><i class="fas fa-search" style="margin-right:8px"></i>Browse Hotels</button>
+        <button onclick="showPage('packages')" style="padding:16px 36px;border:1.5px solid rgba(255,255,255,0.4);color:white;border-radius:var(--radius);background:transparent;cursor:pointer;font-size:16px;font-weight:600;font-family:var(--font-body)"><i class="fas fa-suitcase" style="margin-right:8px"></i>View Packages</button>
+        <button onclick="showPage('signup')" style="padding:16px 36px;border:1.5px solid var(--gold);color:var(--gold);border-radius:var(--radius);background:transparent;cursor:pointer;font-size:16px;font-weight:600;font-family:var(--font-body)"><i class="fas fa-user-plus" style="margin-right:8px"></i>Create Account</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ======================== PACKAGES PAGE ======================== -->
+<div class="page" id="page-packages">
+  <div class="page-container">
+    <section style="background:linear-gradient(135deg,var(--navy),#0B3D2B);padding:100px 40px 60px;text-align:center">
+      <div class="section-tag" style="background:rgba(201,168,76,0.15);color:var(--gold)">Tour Packages</div>
+      <h1 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);font-weight:700;color:white;margin:16px 0;line-height:1.1">Handcrafted Sri Lanka <em style="color:var(--gold);font-style:italic">Experiences</em></h1>
+      <p style="font-size:17px;color:rgba(255,255,255,0.75);max-width:600px;margin:0 auto">Ready-made and custom tour packages for direct customers, corporate partners, honeymoon couples, families, and travel agents.</p>
+    </section>
+
+    <!-- Compare strip -->
+    <div id="pkgCompareStrip" style="display:none;position:sticky;top:calc(var(--nav-h));z-index:200;background:var(--navy);padding:12px 40px;display:none;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
+      <span style="color:white;font-weight:600;font-size:14px"><i class="fas fa-balance-scale" style="color:var(--gold);margin-right:8px"></i>Compare: <span id="pkgCompareCount">0</span> selected (max 4)</span>
+      <div style="display:flex;gap:10px">
+        <button onclick="openPkgCompare()" style="padding:8px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:var(--radius);font-weight:700;cursor:pointer">Compare Now</button>
+        <button onclick="clearPkgCompare()" style="padding:8px 16px;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius);cursor:pointer">Clear</button>
+      </div>
+    </div>
+
+    <section style="background:var(--cream);padding:60px 40px">
+      <!-- Filter tabs -->
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:48px" id="pkgFilterTabs">
+        <button class="pkg-tab-btn" data-type="all" onclick="filterPkgs('all',this)" style="padding:9px 22px;background:var(--deep-teal);color:white;border:none;border-radius:50px;font-weight:600;cursor:pointer;font-size:14px;font-family:var(--font-body)">All Packages</button>
+        <button class="pkg-tab-btn" data-type="b2c" onclick="filterPkgs('b2c',this)" style="padding:9px 22px;background:white;color:var(--text-mid);border:1.5px solid var(--border);border-radius:50px;font-weight:600;cursor:pointer;font-size:14px;font-family:var(--font-body)">Direct Customer</button>
+        <button class="pkg-tab-btn" data-type="corporate" onclick="filterPkgs('corporate',this)" style="padding:9px 22px;background:white;color:var(--text-mid);border:1.5px solid var(--border);border-radius:50px;font-weight:600;cursor:pointer;font-size:14px;font-family:var(--font-body)">Corporate Partner</button>
+        <button class="pkg-tab-btn" data-type="agent" onclick="filterPkgs('agent',this)" style="padding:9px 22px;background:white;color:var(--text-mid);border:1.5px solid var(--border);border-radius:50px;font-weight:600;cursor:pointer;font-size:14px;font-family:var(--font-body)">Travel Agent</button>
+        <button class="pkg-tab-btn" data-type="honeymoon" onclick="filterPkgs('honeymoon',this)" style="padding:9px 22px;background:white;color:var(--text-mid);border:1.5px solid var(--border);border-radius:50px;font-weight:600;cursor:pointer;font-size:14px;font-family:var(--font-body)">Honeymoon</button>
+        <button class="pkg-tab-btn" data-type="family" onclick="filterPkgs('family',this)" style="padding:9px 22px;background:white;color:var(--text-mid);border:1.5px solid var(--border);border-radius:50px;font-weight:600;cursor:pointer;font-size:14px;font-family:var(--font-body)">Family</button>
+      </div>
+      <div class="hotel-cards" id="pkgCards" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))"></div>
+    </section>
+  </div>
+</div>
+
+<!-- Package compare modal -->
+<div class="modal-overlay" id="pkgCompareModal">
+  <div class="modal-card" style="max-width:920px;width:100%;max-height:90vh;overflow-y:auto">
+    <button class="modal-close" onclick="closeModal('pkgCompareModal')"><i class="fas fa-times"></i></button>
+    <h3 style="font-family:var(--font-display);font-size:26px;margin-bottom:20px">Package Comparison</h3>
+    <div id="pkgCompareContent" style="overflow-x:auto"></div>
+  </div>
+</div>
+
+<!-- ======================== SUPPORT PAGE ======================== -->
+<div class="page" id="page-support">
+  <div class="support-page">
+    <div class="support-container">
+      <div class="support-hero">
+        <div class="section-tag">24/7 Help Centre</div>
+        <h1 class="section-title" style="margin-bottom:14px">How Can We <em>Help You?</em></h1>
+        <p class="section-desc">Our friendly support team is always ready to help you plan the perfect Sri Lanka experience.</p>
+      </div>
+      <div class="support-cards">
+        <div class="support-card">
+          <div class="support-card-icon" style="background:linear-gradient(135deg,var(--light-teal),rgba(11,110,79,0.08))"><i class="fas fa-phone" style="color:var(--deep-teal)"></i></div>
+          <div class="support-card-title">Call Us</div>
+          <div class="support-card-desc">Speak directly with our Sri Lanka travel specialists. Available 24 hours a day, 7 days a week.</div>
+          <div class="support-contact-val">+94 11 234 5678</div>
+          <div style="font-size:13px;color:var(--text-light);margin-top:4px">International: +94 11 234 5679</div>
+          <div style="margin-top:16px"><span style="display:inline-block;background:rgba(34,197,94,0.1);color:#16A34A;font-size:12px;font-weight:700;padding:4px 14px;border-radius:50px">● Online Now</span></div>
+        </div>
+        <div class="support-card">
+          <div class="support-card-icon" style="background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(99,102,241,0.15))"><i class="fas fa-envelope" style="color:#4F46E5"></i></div>
+          <div class="support-card-title">Email Support</div>
+          <div class="support-card-desc">Send us a message and our team will get back to you within 2 hours during business hours.</div>
+          <div class="support-contact-val" style="font-size:16px">support@travelbooker.lk</div>
+          <div style="font-size:13px;color:var(--text-light);margin-top:4px">B2B: agents@travelbooker.lk</div>
+          <div style="margin-top:16px"><button class="btn-submit" style="width:auto;padding:8px 20px;font-size:13px" onclick="showModal('emailModal')">Send Email</button></div>
+        </div>
+        <div class="support-card">
+          <div class="support-card-icon" style="background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.15))"><i class="fas fa-comments" style="color:var(--gold)"></i></div>
+          <div class="support-card-title">Live Chat</div>
+          <div class="support-card-desc">Chat with our AI assistant or get connected to a human agent instantly for urgent queries.</div>
+          <div class="support-contact-val" style="font-size:16px">Chat Instantly</div>
+          <div style="font-size:13px;color:var(--text-light);margin-top:4px">Avg. response time: &lt;2 mins</div>
+          <div style="margin-top:16px"><button class="btn-submit" style="width:auto;padding:8px 20px;font-size:13px;background:linear-gradient(135deg,var(--gold),#D4AA52);color:var(--navy)" onclick="openChatbot()">Start Chat</button></div>
+        </div>
+        <div class="support-card">
+          <div class="support-card-icon" style="background:linear-gradient(135deg,rgba(224,90,64,0.08),rgba(224,90,64,0.15))"><i class="fas fa-map-marked-alt" style="color:var(--coral)"></i></div>
+          <div class="support-card-title">Visit Us</div>
+          <div class="support-card-desc">Walk into our flagship office in Colombo for face-to-face assistance and personalised tour planning.</div>
+          <div class="support-contact-val" style="font-size:15px">Colombo 03, Sri Lanka</div>
+          <div style="font-size:13px;color:var(--text-light);margin-top:4px">Level 5, Galadari Hotel Tower</div>
+          <div style="margin-top:16px"><span style="font-size:13px;color:var(--text-light)">Mon–Sat: 8:00 AM – 7:00 PM</span></div>
+        </div>
+      </div>
+      <!-- Booking Reference Tracker -->
+      <div style="background:var(--navy);border-radius:var(--radius-lg);padding:40px;margin-bottom:50px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center">
+        <div>
+          <h3 style="font-family:var(--font-display);font-size:26px;color:white;margin-bottom:8px">Track Your Booking</h3>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6)">Enter your booking reference number to check your reservation status.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <input class="form-input" placeholder="e.g. TB-2026-00123" style="min-width:220px;background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);color:white">
+          <button class="btn-book-now" style="white-space:nowrap;min-width:fit-content">Track Booking</button>
+        </div>
+      </div>
+      <!-- FAQ -->
+      <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div id="faqList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PAYMENT PAGE ======================== -->
+<div class="page" id="page-payment">
+  <div class="payment-page">
+    <div style="max-width:1000px;margin:0 auto;padding:0 30px 20px">
+      <button class="back-btn" onclick="showPage('hotel-detail')"><i class="fas fa-arrow-left"></i> Back to Hotel</button>
+      <h1 style="font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--text-dark);margin-bottom:6px">Secure Checkout</h1>
+      <p style="font-size:15px;color:var(--text-light);margin-bottom:30px">Complete your booking for <strong id="paymentHotelName" style="color:var(--text-dark)">Hotel Name</strong></p>
+    </div>
+    <div class="payment-container">
+      <div>
+        <!-- Guest Details -->
+        <div class="payment-form-section" style="margin-bottom:20px">
+          <div class="payment-section-title"><i class="fas fa-user-circle"></i>Guest Information</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label">First Name</label>
+              <input class="form-input" placeholder="First name" id="payFirstName" value="">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label">Last Name</label>
+              <input class="form-input" placeholder="Last name" id="payLastName">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:16px">
+            <label class="form-label">Email for Confirmation</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-envelope"></i>
+              <input class="form-input" type="email" placeholder="your@email.com" id="payEmail">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-phone"></i>
+              <input class="form-input" placeholder="+94 XX XXX XXXX" id="payPhone">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label class="form-label">Special Requests <span style="font-weight:400;color:var(--text-light)">(optional)</span></label>
+            <textarea class="form-textarea" placeholder="Any dietary needs, accessibility requirements, room preferences…" style="min-height:80px" id="paySpecialReq"></textarea>
+          </div>
+        </div>
+        <!-- Payment Method -->
+        <div class="payment-form-section">
+          <div class="payment-section-title"><i class="fas fa-credit-card"></i>Payment Method</div>
+          <div class="payment-method-tabs">
+            <button class="payment-method-btn active" onclick="selectPayMethod(this,'card')"><i class="fas fa-credit-card"></i> Credit/Debit Card</button>
+            <button class="payment-method-btn" onclick="selectPayMethod(this,'paypal')"><i class="fab fa-paypal" style="color:#003087"></i> PayPal</button>
+            <button class="payment-method-btn" onclick="selectPayMethod(this,'bank')"><i class="fas fa-university"></i> Bank Transfer</button>
+            <button class="payment-method-btn" onclick="selectPayMethod(this,'crypto')"><i class="fab fa-bitcoin" style="color:#F7931A"></i> Crypto</button>
+            <button class="payment-method-btn" onclick="selectPayMethod(this,'instalment')"><i class="fas fa-calendar-alt" style="color:#7C3AED"></i> Instalment</button>
+          </div>
+          <div id="cardPayFields">
+            <div class="card-brands">
+              <span class="card-brand" style="color:#1A1F71">VISA</span>
+              <span class="card-brand" style="color:#EB001B">MC</span>
+              <span class="card-brand" style="color:#2E77BC">AMEX</span>
+              <span class="card-brand">UnionPay</span>
+              <span class="card-brand" style="color:#003087">PayPal</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cardholder Name</label>
+              <input class="form-input" placeholder="Name as it appears on card" id="payCardName">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Card Number</label>
+              <div class="input-icon-wrap">
+                <i class="fas fa-credit-card"></i>
+                <input class="form-input" placeholder="1234  5678  9012  3456" maxlength="19" id="payCardNumber" oninput="formatCard(this)">
+              </div>
+            </div>
+            <div class="card-input-grid">
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label">Expiry Date</label>
+                <input class="form-input" placeholder="MM / YY" maxlength="7" id="payExpiry" oninput="formatExpiry(this)">
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label">CVV / CVC</label>
+                <div class="input-icon-wrap">
+                  <i class="fas fa-lock"></i>
+                  <input class="form-input" placeholder="•••" maxlength="4" id="payCVV" style="padding-left:42px">
+                </div>
+              </div>
+            </div>
+            <div class="secure-badge"><i class="fas fa-shield-alt"></i> Your payment is encrypted with 256-bit SSL encryption. We never store your card details.</div>
+          </div>
+          <div id="paypalFields" style="display:none;text-align:center;padding:30px">
+            <div style="font-size:48px;margin-bottom:16px">🅿</div>
+            <p style="font-size:14px;color:var(--text-light)">You will be redirected to PayPal to complete your payment securely.</p>
+          </div>
+          <div id="bankFields" style="display:none">
+            <div style="background:var(--light-teal);border-radius:var(--radius);padding:20px;margin-top:16px">
+              <div style="font-weight:700;font-size:14px;color:var(--deep-teal);margin-bottom:12px">Bank Transfer Details</div>
+              <div style="font-size:14px;color:var(--text-mid);line-height:2">Bank: <strong>Bank of Ceylon</strong><br>Account Name: <strong>Coastal Tours (Pvt) Ltd</strong><br>Account No: <strong>1234567890</strong><br>SWIFT: <strong>BCEYLKLX</strong><br>Reference: <strong id="bankRef">TB-2026-XXXXX</strong></div>
+            </div>
+          </div>
+          <div id="cryptoFields" style="display:none;text-align:center;padding:20px">
+            <p style="font-size:14px;color:var(--text-light)">We accept Bitcoin, Ethereum, and USDC. Crypto payments are processed via our secure partner.</p>
+          </div>
+          <div id="instalmentFields" style="display:none">
+            <div style="background:linear-gradient(135deg,rgba(124,58,237,0.05),rgba(124,58,237,0.1));border:1px solid rgba(124,58,237,0.2);border-radius:var(--radius);padding:20px;margin-top:16px">
+              <div style="font-weight:700;font-size:14px;color:#7C3AED;margin-bottom:14px"><i class="fas fa-calendar-alt" style="margin-right:8px"></i>Flexible Instalment Plan</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">
+                <label style="cursor:pointer;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center;transition:all 0.2s">
+                  <input type="radio" name="instalment" value="2" style="accent-color:#7C3AED" checked> <strong>2</strong> months<br><span style="font-size:11px;color:var(--text-light)">50% today</span>
+                </label>
+                <label style="cursor:pointer;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center">
+                  <input type="radio" name="instalment" value="3" style="accent-color:#7C3AED"> <strong>3</strong> months<br><span style="font-size:11px;color:var(--text-light)">35% today</span>
+                </label>
+                <label style="cursor:pointer;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px;text-align:center">
+                  <input type="radio" name="instalment" value="6" style="accent-color:#7C3AED"> <strong>6</strong> months<br><span style="font-size:11px;color:var(--text-light)">20% today</span>
+                </label>
+              </div>
+              <div class="form-group" style="margin-bottom:10px">
+                <label class="form-label">Card for recurring charges</label>
+                <div class="input-icon-wrap"><i class="fas fa-credit-card"></i><input class="form-input" placeholder="1234  5678  9012  3456" maxlength="19" oninput="formatCard(this)"></div>
+              </div>
+              <p style="font-size:12px;color:var(--text-light)"><i class="fas fa-info-circle" style="color:#7C3AED;margin-right:5px"></i>No interest. Auto-charged monthly. Cancel before next charge.</p>
+            </div>
+          </div>
+          <!-- Promo code -->
+          <div style="display:flex;gap:8px;margin-top:22px">
+            <div class="input-icon-wrap" style="flex:1">
+              <i class="fas fa-tag" style="color:var(--deep-teal)"></i>
+              <input class="form-input" placeholder="Promo / discount code" id="promoInput">
+            </div>
+            <button onclick="applyPromo()" style="padding:0 20px;background:var(--deep-teal);color:white;border:none;border-radius:var(--radius);font-weight:600;cursor:pointer;white-space:nowrap">Apply</button>
+          </div>
+          <div id="promoMsg" style="font-size:12px;color:var(--deep-teal);margin-top:6px;display:none"></div>
+          <button class="btn-book-now" style="margin-top:20px" onclick="confirmPayment()">
+            <i class="fas fa-lock" style="margin-right:8px"></i>Confirm & Pay <span id="payTotalDisplay">$495</span>
+          </button>
+          <div style="display:flex;justify-content:center;gap:16px;margin-top:14px;flex-wrap:wrap">
+            <span style="font-size:12px;color:var(--text-light);display:flex;align-items:center;gap:5px"><i class="fas fa-rotate-left" style="color:var(--deep-teal)"></i> Free Cancellation</span>
+            <span style="font-size:12px;color:var(--text-light);display:flex;align-items:center;gap:5px"><i class="fas fa-certificate" style="color:var(--deep-teal)"></i> Best Price Guarantee</span>
+            <span style="font-size:12px;color:var(--text-light);display:flex;align-items:center;gap:5px"><i class="fas fa-headset" style="color:var(--deep-teal)"></i> 24/7 Support</span>
+          </div>
+        </div>
+      </div>
+      <!-- Summary Sidebar -->
+      <div>
+        <div class="payment-summary">
+          <img class="payment-summary-hotel-img" id="payHotelImg" src="" alt="">
+          <div class="payment-summary-body">
+            <div class="payment-summary-name" id="payHotelName">Hotel Name</div>
+            <div class="payment-summary-location"><i class="fas fa-map-marker-alt" style="color:var(--coral)"></i><span id="payHotelLocation">Location, Sri Lanka</span></div>
+            <div class="payment-summary-dates">
+              <div class="payment-summary-dates-row"><span style="color:var(--text-light)">Check-in</span><span style="font-weight:600" id="payCheckinDisplay">—</span></div>
+              <div class="payment-summary-dates-row"><span style="color:var(--text-light)">Check-out</span><span style="font-weight:600" id="payCheckoutDisplay">—</span></div>
+              <div class="payment-summary-dates-row"><span style="color:var(--text-light)">Duration</span><span style="font-weight:600" id="payNightsDisplay">3 nights</span></div>
+              <div class="payment-summary-dates-row"><span style="color:var(--text-light)">Rooms</span><span style="font-weight:600" id="payRoomsDisplay">1 Room</span></div>
+            </div>
+            <div class="payment-breakdown">
+              <div class="payment-breakdown-row"><span id="payBreakdown1Label">1 Room × 3 nights</span><span id="payBreakdown1Val">$450</span></div>
+              <div class="payment-breakdown-row"><span>Taxes & Fees (10%)</span><span id="payTaxDisplay">$45</span></div>
+              <div class="payment-breakdown-row" id="payLoyaltyRow" style="display:none;color:var(--deep-teal)"><span>Loyalty Discount</span><span id="payLoyaltyDisc">-$0</span></div>
+            </div>
+            <div class="payment-total"><span>Total</span><span id="payGrandTotal">$495</span></div>
+            <div style="margin-top:16px;padding:12px;background:var(--light-teal);border-radius:var(--radius);font-size:12px;color:var(--deep-teal)"><i class="fas fa-receipt" style="margin-right:6px"></i>A detailed receipt will be emailed after payment.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PROFILE PAGE ======================== -->
+<div class="page" id="page-profile">
+  <div class="profile-page">
+    <div class="profile-container">
+      <div class="profile-header-card">
+        <div class="profile-big-avatar" id="profileAvatarBig">U</div>
+        <div class="profile-header-info">
+          <div class="profile-name" id="profileDisplayName">Guest User</div>
+          <div class="profile-type-badge" id="profileTypeBadge"><i class="fas fa-star"></i> Tourist</div>
+          <div class="profile-email" id="profileEmail">user@email.com</div>
+          <div class="profile-ref" id="profileRef">Ref: TB-2026-00000</div>
+        </div>
+        <div class="profile-loyalty">
+          <div class="profile-loyalty-num" id="profileLoyaltyNum">2,450</div>
+          <div class="profile-loyalty-label">Loyalty Points</div>
+          <div style="margin-top:6px;font-size:11px;color:rgba(255,255,255,0.5)">Gold Member</div>
+        </div>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-nav-card">
+          <div class="profile-nav-item active" onclick="switchProfileTab('overview', this)"><i class="fas fa-home"></i> Overview</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('bookings', this)"><i class="fas fa-suitcase"></i> My Bookings</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('details', this)"><i class="fas fa-user-circle"></i> Personal Details</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('preferences', this)"><i class="fas fa-sliders-h"></i> Preferences</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('wishlist', this)"><i class="fas fa-heart" style="color:#E05A40"></i> Wishlist</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('loyalty', this)"><i class="fas fa-crown" style="color:var(--gold)"></i> Loyalty Rewards</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('security', this)"><i class="fas fa-shield-alt"></i> Security</div>
+          <div class="profile-nav-item" style="margin-top:auto;color:var(--coral)" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
+        </div>
+        <div class="profile-content" id="profileContent">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== BOOKING SUCCESS PAGE ======================== -->
+<div class="page" id="page-booking-success">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--navy),#0B3D2B);padding:100px 20px 40px;text-align:center">
+    <div>
+      <div style="width:100px;height:100px;background:rgba(34,197,94,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:48px;border:2px solid rgba(34,197,94,0.3)">✅</div>
+      <h1 style="font-family:var(--font-display);font-size:48px;font-weight:700;color:white;margin-bottom:10px">Booking Confirmed!</h1>
+      <p style="font-size:16px;color:rgba(255,255,255,0.7);margin-bottom:8px">Your adventure in Sri Lanka is officially booked.</p>
+      <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:30px">A confirmation email has been sent to <strong id="successEmail" style="color:rgba(255,255,255,0.8)">your@email.com</strong></p>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:28px;display:inline-block;margin-bottom:36px;min-width:320px">
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Booking Reference</div>
+        <div id="successRef" style="font-family:monospace;font-size:28px;font-weight:700;color:var(--gold);letter-spacing:2px">TB-2026-00000</div>
+        <div style="margin-top:14px;font-size:13px;color:rgba(255,255,255,0.6)" id="successHotelSum">—</div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+        <button class="btn-book-now" style="width:auto;padding:14px 30px" onclick="showPage('profile')">View My Booking</button>
+        <button onclick="downloadVATInvoice()" style="padding:14px 30px;border:1px solid rgba(201,168,76,0.5);color:var(--gold);border-radius:var(--radius);background:transparent;cursor:pointer;font-size:15px;font-weight:600;font-family:var(--font-body)"><i class="fas fa-file-invoice" style="margin-right:8px"></i>VAT Invoice</button>
+        <button onclick="showPage('home')"  style="padding:14px 30px;border:1px solid rgba(255,255,255,0.25);color:white;border-radius:var(--radius);background:transparent;cursor:pointer;font-size:15px;font-weight:600;font-family:var(--font-body)">Explore More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== CHATBOT ======================== -->
+  <!-- Global Footer -->
+  <footer id="globalFooter">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <span class="nav-logo-text" style="color:white">TravelBooker</span>
+        <p class="footer-desc">Sri Lanka's most trusted online travel booking platform. Connecting travellers, travel agents, and hotels since 2020. A product of CodeGen International.</p>
+        <div class="footer-social">
+          <div class="social-btn"><i class="fab fa-facebook-f"></i></div>
+          <div class="social-btn"><i class="fab fa-instagram"></i></div>
+          <div class="social-btn"><i class="fab fa-twitter"></i></div>
+          <div class="social-btn"><i class="fab fa-linkedin-in"></i></div>
+          <div class="social-btn"><i class="fab fa-youtube"></i></div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a onclick="showPage('destinations');openDestination('')">All Destinations</a></li>
+          <li><a onclick="showPage('packages');filterPkgs('b2c',document.querySelector('[data-type=b2c]'))">Beach Resorts</a></li>
+          <li><a onclick="showPage('destinations');openDestination('Nuwara Eliya')">Hill Country</a></li>
+          <li><a onclick="showPage('destinations');openDestination('Sigiriya')">Heritage Cities</a></li>
+          <li><a onclick="showPage('destinations');openDestination('Yala')">Wildlife & Nature</a></li>
+          <li><a onclick="showPage('packages')">Tour Packages</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">For Travellers</div>
+        <ul class="footer-links">
+          <li><a onclick="showPage('signup')">Create Account</a></li>
+          <li><a onclick="showPage('about')">About TravelBooker</a></li>
+          <li><a onclick="showPage('profile');switchProfileTab('loyalty',null)">Loyalty Program</a></li>
+          <li><a>Travel Insurance</a></li>
+          <li><a>Visa Information</a></li>
+          <li><a onclick="showPage('support')">Help & Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">For Business</div>
+        <ul class="footer-links">
+          <li><a onclick="showPage('login');switchLoginType('agent')">Travel Agent Portal</a></li>
+          <li><a onclick="showPage('login');switchLoginType('corporate')">Corporate Accounts</a></li>
+          <li><a onclick="showPage('about')">List Your Property</a></li>
+          <li><a>Partner Programme</a></li>
+          <li><a>API Access</a></li>
+          <li><a onclick="showPage('support')">Contact Sales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TravelBooker by CodeGen International. All rights reserved.</span>
+      <div class="footer-badges">
+        <span class="footer-badge" onclick="showPage('about')" style="cursor:pointer">About Us</span>
+        <span class="footer-badge">Privacy Policy</span>
+        <span class="footer-badge">Terms of Service</span>
+        <span class="footer-badge">Cookie Policy</span>
+        <span class="footer-badge">GDPR Compliant</span>
+      </div>
+    </div>
+  </footer>
+<button class="chatbot-btn" id="chatbotBtn" onclick="toggleChatbot()">
+  <i class="fas fa-comments"></i>
+  <div class="badge">1</div>
+</button>
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar">🤖</div>
+    <div>
+      <div class="chatbot-name">Ayu — Travel Assistant</div>
+      <div class="chatbot-status">Online · Powered by AI</div>
+    </div>
+    <button class="chatbot-close" onclick="toggleChatbot()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chatbot-messages" id="chatMessages">
+    <div class="chat-msg chat-msg-bot">
+      <div class="chat-bubble">Ayubowan! 🙏 I'm Ayu, your Sri Lanka travel assistant. I can help you find the perfect hotel, plan your itinerary, or answer any questions about our destinations. What can I help you with today?</div>
+      <div class="chat-time">Just now</div>
+      <div class="chat-suggestions">
+        <button class="chat-suggestion" onclick="chatSend('What are the best beach destinations?')">Best beaches?</button>
+        <button class="chat-suggestion" onclick="chatSend('Show me luxury hotels')">Luxury hotels</button>
+        <button class="chat-suggestion" onclick="chatSend('Help me book a hotel')">Book a hotel</button>
+        <button class="chat-suggestion" onclick="chatSend('What places to visit in Sri Lanka?')">Top places</button>
+      </div>
+    </div>
+  </div>
+  <div class="chatbot-input-row">
+    <input class="chatbot-input" placeholder="Ask Ayu anything…" id="chatInput" onkeypress="if(event.key==='Enter')chatSend()">
+    <button class="chatbot-send" onclick="chatSend()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<!-- ======================== MODAL: Email Support ======================== -->
+<div class="modal-overlay" id="emailModal">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal('emailModal')"><i class="fas fa-times"></i></button>
+    <h3 style="font-family:var(--font-display);font-size:24px;margin-bottom:6px">Send Us a Message</h3>
+    <p style="font-size:14px;color:var(--text-light);margin-bottom:24px">We typically respond within 2 hours.</p>
+    <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" placeholder="Full name"></div>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="your@email.com"></div>
+    <div class="form-group"><label class="form-label">Subject</label>
+      <select class="form-select">
+        <option>Booking Enquiry</option><option>Payment Issue</option><option>Cancellation Request</option>
+        <option>Travel Agent Support</option><option>Technical Issue</option><option>Other</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Describe your issue or question…"></textarea></div>
+    <button class="btn-submit" onclick="closeModal('emailModal');showToast('✉️ Message sent! We\'ll reply within 2 hours.')">Send Message</button>
+  </div>
+</div>
+
+<!-- ======================== TOAST ======================== -->
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<script src="script.js"></script>
+</body>
+</html>
