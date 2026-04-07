@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TravelBooker Sri Lanka – Coastal Tours</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo" onclick="showPage('home')">
+    <div class="nav-logo-icon">✈</div>
+    <div>
+      <span class="nav-logo-text">TravelBooker</span>
+      <span class="nav-logo-sub">Coastal Tours · Sri Lanka</span>
+    </div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <button class="nav-link active" onclick="showPage('home')" id="nav-home">Home</button>
+    <button class="nav-link" onclick="showPage('destinations')" id="nav-destinations">Destinations</button>
+    <button class="nav-link" onclick="showPage('packages')" id="nav-packages">Packages</button>
+    <button class="nav-link" onclick="showPage('about')" id="nav-about">About Us</button>
+    <button class="nav-link" onclick="showPage('support')" id="nav-support">Support</button>
+    <div class="nav-divider"></div>
+    <!-- Residence Toggle -->
+    <div class="residence-toggle">
+      <button class="residence-btn active" id="btn-resident-foreign" onclick="setResidence('foreign')">Tourist</button>
+      <button class="residence-btn" id="btn-resident-local" onclick="setResidence('local')">Sri Lankan</button>
+    </div>
+    <!-- Currency Toggle -->
+    <div class="currency-toggle">
+      <button class="currency-btn active" id="btn-usd" onclick="setCurrency('USD')">$ USD</button>
+      <button class="currency-btn" id="btn-lkr" onclick="setCurrency('LKR')">₨ LKR</button>
+    </div>
+    <div id="authButtons">
+      <button class="btn-nav-login" onclick="showPage('login')">Log In</button>
+      <button class="btn-nav-signup" onclick="showPage('signup')">Sign Up</button>
+    </div>
+    <div id="userMenu" style="display:none">
+      <div class="user-menu-btn" onclick="showPage('profile')">
+        <div class="user-avatar" id="navAvatarInitial">U</div>
+        <span id="navUserName">User</span>
+        <i class="fas fa-chevron-down" style="font-size:10px;opacity:0.6"></i>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================== HOME PAGE ======================== -->
+<main class="page active" id="page-home">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🌴 Sri Lanka's Premier Booking Platform</div>
+      <h1 class="hero-title">Discover <em class="accent">Paradise</em><br>in Sri Lanka</h1>
+      <p class="hero-subtitle">From misty highlands to golden shores — find and book handpicked hotels, villas, and resorts across the Pearl of the Indian Ocean.</p>
+      <!-- Search Bar -->
+      <div class="hero-search">
+        <div class="hero-search-field">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <label>Destination</label>
+            <select id="heroDestSelect">
+              <option value="">All Sri Lanka</option>
+              <option>Colombo</option><option>Kandy</option><option>Nuwara Eliya</option>
+              <option>Galle</option><option>Mirissa</option><option>Weligama</option>
+              <option>Ella</option><option>Sigiriya</option><option>Jaffna</option>
+              <option>Trincomalee</option><option>Arugam Bay</option><option>Yala</option>
+              <option>Hikkaduwa</option><option>Polonnaruwa</option><option>Bentota</option><option>Unawatuna</option>
+            </select>
+          </div>
+        </div>
+        <div class="hero-search-field">
+          <i class="fas fa-calendar-check"></i>
+          <div>
+            <label>Check-in</label>
+            <input type="date" id="heroCheckin">
+          </div>
+        </div>
+        <div class="hero-search-field">
+          <i class="fas fa-users"></i>
+          <div>
+            <label>Guests</label>
+            <select id="heroGuests">
+              <option value="1">1 Guest</option><option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option><option value="4">4 Guests</option><option value="5">5 Guests</option><option value="10">10+ Guests</option>
+            </select>
+          </div>
+        </div>
+        <button class="hero-search-btn" onclick="showPage('destinations')">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">500+</span><span class="hero-stat-label">Premium Properties</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">4.9★</span><span class="hero-stat-label">Average Rating</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Destination Tiles -->
+  <section class="destinations-section" id="destSection">
+    <div class="section-header">
+      <div class="section-tag">🗺 Explore Sri Lanka</div>
+      <h2 class="section-title">Choose Your <em>Perfect Escape</em></h2>
+      <p class="section-desc">From the ancient city of Kandy to the surf paradise of Weligama — every corner of Sri Lanka holds a story.</p>
+    </div>
+    <div class="dest-grid" id="destTilesGrid"></div>
+  </section>
+
+  <!-- About Us Section (Home) -->
+  <section style="background:white; padding:90px 40px">
+    <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center">
+      <div style="border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg)">
+        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=700&q=80" alt="Sri Lanka Heritage" style="width:100%; height:450px; object-fit:cover">
+      </div>
+      <div>
+        <div class="section-tag">Our Legacy</div>
+        <h2 class="section-title">Born from a Passion for <em style="color:var(--deep-teal)">Sri Lanka</em></h2>
+        <p style="font-size:16px; color:var(--text-mid); line-height:1.8; margin-bottom:20px">TravelBooker connects travellers, travel agents, and hotels across Sri Lanka. A product of <strong>CodeGen International</strong>, we bring together 500+ handpicked properties into a single premium experience.</p>
+        <button class="btn-submit" style="width:auto; padding:12px 30px" onclick="showPage('about')">Learn More About Us</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <div class="section-header">
+      <div class="section-tag" style="background:rgba(201,168,76,0.15); color: var(--gold);">Why TravelBooker</div>
+      <h2 class="section-title" style="color:white">Everything You Need,<br><em>Nothing You Don't</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💸</div>
+        <div class="feature-title">Localized Pricing</div>
+        <div class="feature-desc">Exclusive discounts for Sri Lankan residents and live LKR exchange rates for everyone.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-title">Secure Booking</div>
+        <div class="feature-desc">Bank-grade encryption keeps your data and payments safe across all transactions.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <div class="feature-title">Individual & Partners</div>
+        <div class="feature-desc">Personalized flows for solo travelers, families, and business partners.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="reviews-section">
+    <div class="section-header">
+      <div class="section-tag">Guest Stories</div>
+      <h2 class="section-title">What Travellers <em>Are Saying</em></h2>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </section>
+</main>
+
+<!-- ======================== DESTINATIONS PAGE ======================== -->
+<main class="page" id="page-destinations">
+  <div class="dest-page-container">
+    <div class="dest-page-header">
+      <h1 class="dest-page-title">Hotels & Resorts in <em>Sri Lanka</em></h1>
+      <p class="dest-page-subtitle" id="destPageSubtitle">Showing properties across the island</p>
+    </div>
+    <div class="dest-page-layout">
+      <aside class="filter-sidebar">
+        <div class="filter-title">
+          Filters <span class="filter-clear" onclick="renderHotelCards(hotels)">Clear All</span>
+        </div>
+        <!-- Star Rating -->
+        <div class="filter-section">
+          <div class="filter-section-title">Star Rating</div>
+          <div class="star-filter">
+            <label class="star-check"><input type="checkbox" value="5" class="filter-star"><span class="star-check-label"><span class="stars">★★★★★</span> 5 Stars</span></label>
+            <label class="star-check"><input type="checkbox" value="4" class="filter-star"><span class="star-check-label"><span class="stars">★★★★</span>☆ 4 Stars</span></label>
+            <label class="star-check"><input type="checkbox" value="3" class="filter-star"><span class="star-check-label"><span class="stars">★★★</span>☆☆ 3 Stars</span></label>
+          </div>
+        </div>
+        <!-- Price Range -->
+        <div class="filter-section">
+          <div class="filter-section-title">Price per Night</div>
+          <div class="price-range-wrap">
+            <div class="price-range-labels"><span id="priceMin">$0</span><span id="priceMax">$1,000+</span></div>
+            <input type="range" class="price-slider" id="priceRange" min="0" max="1000" value="1000" oninput="updatePrice(this.value); filterHotels()">
+            <div class="price-display">Up to <span id="priceDisplay">$1,000</span></div>
+          </div>
+        </div>
+        <!-- Amenities -->
+        <div class="filter-section">
+          <div class="filter-section-title">Amenities</div>
+          <div class="amenities-grid">
+            <label class="amenity-check"><input type="checkbox" value="WiFi" class="filter-amenity"><span class="amenity-label">📶 WiFi</span></label>
+            <label class="amenity-check"><input type="checkbox" value="Pool" class="filter-amenity"><span class="amenity-label">🏊 Pool</span></label>
+            <label class="amenity-check"><input type="checkbox" value="Spa" class="filter-amenity"><span class="amenity-label">💆 Spa</span></label>
+            <label class="amenity-check"><input type="checkbox" value="Gym" class="filter-amenity"><span class="amenity-label">🏋 Gym</span></label>
+            <label class="amenity-check"><input type="checkbox" value="Beachfront" class="filter-amenity"><span class="amenity-label">🌊 Beach</span></label>
+          </div>
+        </div>
+        <!-- Property Type -->
+        <div class="filter-section">
+          <div class="filter-section-title">Property Type</div>
+          <div class="discount-checks">
+            <label class="discount-check"><input type="checkbox" value="Hotel" class="filter-type"><span>🏨 Hotel</span></label>
+            <label class="discount-check"><input type="checkbox" value="Resort" class="filter-type"><span>🌿 Resort</span></label>
+            <label class="discount-check"><input type="checkbox" value="Villa" class="filter-type"><span>🏡 Villa</span></label>
+            <label class="discount-check"><input type="checkbox" value="Boutique" class="filter-type"><span>🏖 Boutique</span></label>
+          </div>
+        </div>
+        <!-- Region -->
+        <div class="filter-section" style="border-bottom:none;margin-bottom:0;padding-bottom:0">
+          <div class="filter-section-title">Region</div>
+          <div class="discount-checks">
+            <label class="discount-check"><input type="checkbox" value="Western" class="filter-region"><span>🏙 Western</span></label>
+            <label class="discount-check"><input type="checkbox" value="Southern" class="filter-region"><span>🌊 Southern</span></label>
+            <label class="discount-check"><input type="checkbox" value="Central" class="filter-region"><span>⛰ Central</span></label>
+          </div>
+        </div>
+      </aside>
+      <div>
+        <div class="dest-results-header">
+          <span class="results-count"><strong id="hotelCount">0</strong> properties found</span>
+          <select class="sort-select" id="sortSelect" onchange="sortHotels()">
+            <option>Sort: Recommended</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
+        <div class="hotel-cards" id="hotelCards"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ======================== PACKAGES PAGE ======================== -->
+<main class="page" id="page-packages">
+    <div class="dest-page-container">
+        <div class="section-header" style="text-align:left; margin-bottom:40px">
+            <div class="section-tag">🎁 Curated Experiences</div>
+            <h1 class="dest-page-title">Explore Our <em>Tour Packages</em></h1>
+            <p class="dest-page-subtitle">Hand-picked journeys for families, honeymooners, and partners.</p>
+            <div class="auth-tabs" style="max-width:500px; margin-top:30px">
+                <button class="auth-tab active" onclick="filterPkgs('all', this)">All Deals</button>
+                <button class="auth-tab" onclick="filterPkgs('family', this)">Family</button>
+                <button class="auth-tab" onclick="filterPkgs('corporate', this)">Partner</button>
+                <button class="auth-tab" onclick="filterPkgs('honeymoon', this)">Romantic</button>
+            </div>
+        </div>
+        <div class="dest-grid" id="pkgCards"></div>
+        <!-- Compare Strip -->
+        <div id="pkgCompareStrip" class="compare-strip" style="display:none">
+          <div style="display:flex;align-items:center;gap:12px"><i class="fas fa-layer-group" style="color:var(--gold)"></i> <strong>Comparison:</strong> <span id="compareCount">0</span> packages selected</div>
+          <div style="display:flex;gap:15px">
+            <button class="btn-explore" style="background:white;color:var(--navy);padding:8px 20px" onclick="openCompareModal()">Compare Now</button>
+            <button class="btn-explore" style="background:rgba(255,255,255,0.15);padding:8px 20px" onclick="clearCompare()">Clear</button>
+          </div>
+        </div>
+    </div>
+</main>
+
+<!-- ======================== ABOUT US PAGE ======================== -->
+<main class="page" id="page-about">
+  <div class="page-container">
+    <section style="background:linear-gradient(135deg,var(--navy) 0%,#0B3D2B 50%,#0B6E4F 100%); padding:100px 40px 80px; text-align:center; position:relative; overflow:hidden">
+      <div style="position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=70') center/cover; opacity:0.15"></div>
+      <div style="position:relative; z-index:1">
+        <div class="section-tag" style="background:rgba(201,168,76,0.15); color:var(--gold)">About Us</div>
+        <h1 style="font-family:var(--font-display); font-size:clamp(40px,6vw,72px); font-weight:700; color:white; margin:16px 0 20px; line-height:1.1">Sri Lanka's Premier<br><em style="color:var(--gold); font-style:italic">Travel Booking Platform</em></h1>
+        <p style="font-size:18px; color:rgba(255,255,255,0.8); max-width:640px; margin:0 auto; line-height:1.8">TravelBooker connects travellers, travel agents, and hotels across Sri Lanka.</p>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section style="background:var(--deep-teal); padding:40px">
+      <div style="max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center">
+        <div><div style="font-family:var(--font-display); font-size:42px; font-weight:700; color:var(--gold)">500+</div><div style="color:rgba(255,255,255,0.75); font-size:14px">Partner Hotels</div></div>
+        <div><div style="font-family:var(--font-display); font-size:42px; font-weight:700; color:var(--gold)">16</div><div style="color:rgba(255,255,255,0.75); font-size:14px">Destinations</div></div>
+        <div><div style="font-family:var(--font-display); font-size:42px; font-weight:700; color:var(--gold)">50K+</div><div style="color:rgba(255,255,255,0.75); font-size:14px">Happy Travellers</div></div>
+        <div><div style="font-family:var(--font-display); font-size:42px; font-weight:700; color:var(--gold)">6</div><div style="color:rgba(255,255,255,0.75); font-size:14px">Years in Business</div></div>
+      </div>
+    </section>
+
+    <section style="background:white; padding:80px 40px">
+      <div style="max-width:1100px; margin:0 auto">
+        <h2 class="section-title" style="text-align:center; margin-bottom:40px">Our <em>Story</em></h2>
+        <p style="font-size:16px; color:var(--text-mid); line-height:1.8; margin-bottom:20px">TravelBooker was founded as a product of CodeGen International to bridge the gap between travellers and the extraordinary hotels of Sri Lanka. We bring together boutique villas, world-class resorts, and heritage properties into a single unified platform.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- ======================== SUPPORT PAGE ======================== -->
+<main class="page" id="page-support">
+  <div class="support-page">
+    <div class="support-container">
+      <div class="support-hero">
+        <div class="section-tag">24/7 Help Centre</div>
+        <h1 class="section-title">How Can We <em>Help You?</em></h1>
+        <p class="section-desc">Our support team is always ready to help you plan the perfect journey.</p>
+      </div>
+      <div class="support-cards">
+        <div class="support-card">
+          <div class="support-card-icon" style="background:var(--light-teal)"><i class="fas fa-phone" style="color:var(--deep-teal)"></i></div>
+          <div class="support-card-title">Call Us</div>
+          <div class="support-contact-val">+94 11 234 5678</div>
+          <p class="support-card-desc">Speak directly with our travel specialists.</p>
+        </div>
+        <div class="support-card">
+          <div class="support-card-icon" style="background:rgba(99,102,241,0.08)"><i class="fas fa-envelope" style="color:#4F46E5"></i></div>
+          <div class="support-card-title">Email Us</div>
+          <div class="support-contact-val" style="font-size:16px">support@travelbooker.lk</div>
+          <button class="btn-submit" style="width:auto; padding:8px 20px; font-size:13px; margin-top:10px" onclick="document.getElementById('emailModal').classList.add('open')">Send Email</button>
+        </div>
+      </div>
+      <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div id="faqList"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ======================== PAYMENT PAGE ======================== -->
+<main class="page" id="page-payment">
+  <div class="payment-page">
+    <div style="max-width:1000px; margin:0 auto; padding:0 30px 20px">
+      <button class="back-btn" onclick="showPage('hotel-detail')"><i class="fas fa-arrow-left"></i> Back to Hotel</button>
+      <h1 style="font-family:var(--font-display); font-size:36px; font-weight:700; color:var(--text-dark)">Secure Checkout</h1>
+      <p style="font-size:15px; color:var(--text-light)">Complete your booking for <strong id="paymentHotelName">Hotel</strong></p>
+    </div>
+    <div class="payment-container">
+      <div class="payment-form-section">
+        <div class="payment-section-title"><i class="fas fa-user-circle"></i> Guest Information</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+          <input class="form-input" placeholder="First Name" id="payFirstName">
+          <input class="form-input" placeholder="Last Name" id="payLastName">
+        </div>
+        <div class="form-group" style="margin-top:16px">
+          <input class="form-input" type="email" placeholder="Email Address" id="payEmail">
+        </div>
+        
+        <div class="payment-section-title" style="margin-top:30px"><i class="fas fa-credit-card"></i> Payment Method</div>
+        <div class="payment-method-tabs">
+          <button class="payment-method-btn active" onclick="selectPayMethod(this,'card')"><i class="fas fa-credit-card"></i> Card</button>
+          <button class="payment-method-btn" onclick="selectPayMethod(this,'paypal')"><i class="fab fa-paypal"></i> PayPal</button>
+        </div>
+        <div id="cardPayFields">
+          <div class="form-group"><input class="form-input" placeholder="Cardholder Name"></div>
+          <div class="form-group"><input class="form-input" placeholder="Card Number" maxlength="19"></div>
+          <div class="card-input-grid">
+            <input class="form-input" placeholder="MM / YY">
+            <input class="form-input" placeholder="CVV">
+          </div>
+        </div>
+        <button class="btn-book-now" style="margin-top:30px" onclick="confirmPayment()">Confirm & Pay <span id="payTotalDisplay"></span></button>
+      </div>
+      
+      <div class="payment-summary">
+        <img class="payment-summary-hotel-img" id="payHotelImg" src="">
+        <div class="payment-summary-body">
+          <div class="payment-summary-name" id="paySummaryHotel">Hotel Name</div>
+          <div class="payment-summary-dates">
+            <div class="payment-summary-dates-row"><span>Check-in</span><span id="payCheckin">—</span></div>
+            <div class="payment-summary-dates-row"><span>Check-out</span><span id="payCheckout">—</span></div>
+          </div>
+          <div class="payment-total"><span>Total</span><span id="payGrandTotal">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ======================== SUCCESS PAGE ======================== -->
+<main class="page" id="page-booking-success">
+  <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--navy); padding:40px; text-align:center; color:white">
+    <div>
+      <div style="width:100px; height:100px; background:rgba(34,197,94,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:48px; border:2px solid #22C55E">✅</div>
+      <h1 style="font-family:var(--font-display); font-size:48px; margin-bottom:10px">Booking Confirmed!</h1>
+      <p style="margin-bottom:30px">A confirmation email has been sent to your inbox.</p>
+      <div style="background:rgba(255,255,255,0.07); padding:28px; border-radius:var(--radius-lg); margin-bottom:36px">
+        <div style="font-size:12px; text-transform:uppercase; opacity:0.5; margin-bottom:4px">Reference</div>
+        <div style="font-size:28px; color:var(--gold); font-weight:700" id="successRef">TB-2026-X</div>
+      </div>
+      <button class="btn-book-now" style="width:auto; padding:14px 40px" onclick="showPage('home')">Back to Home</button>
+    </div>
+  </div>
+</main>
+
+<!-- ======================== PROFILE PAGE ======================== -->
+<main class="page" id="page-profile">
+  <div class="profile-page">
+    <div class="profile-container">
+      <div class="profile-header-card">
+        <div class="profile-big-avatar" id="profileAvatarBig">U</div>
+        <div>
+          <div class="profile-name" id="profileDisplayName">User Name</div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="profile-type-badge" id="profileTypeBadge"><i class="fas fa-star"></i> Gold Member</div>
+            <div id="profileEmail" style="color:rgba(255,255,255,0.7);font-size:14px">user@example.com</div>
+          </div>
+        </div>
+        <div class="profile-loyalty">
+          <div class="profile-loyalty-num" id="profileLoyaltyNum">2,450</div>
+          <div class="profile-loyalty-label">Loyalty Points</div>
+        </div>
+      </div>
+      <div class="profile-grid">
+        <aside class="profile-nav-card">
+          <div class="profile-nav-item active" onclick="switchProfileTab('overview', this)"><i class="fas fa-home"></i> Overview</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('bookings', this)"><i class="fas fa-calendar-alt"></i> My Bookings</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('details', this)"><i class="fas fa-user-edit"></i> Personal Details</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('loyalty', this)"><i class="fas fa-crown"></i> Loyalty Rewards</div>
+          <div class="profile-nav-item" onclick="switchProfileTab('security', this)"><i class="fas fa-shield-alt"></i> Security</div>
+          <div class="profile-nav-item" style="margin-top:20px;color:var(--coral)" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
+        </aside>
+        <div id="profileContent">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<main class="page" id="page-hotel-detail">
+  <div class="detail-page">
+    <div class="detail-hero">
+      <img class="detail-hero-img" id="detailHeroImg" src="" alt="">
+      <div class="detail-hero-overlay"></div>
+      <div class="detail-hero-info">
+        <div>
+          <div class="detail-hotel-name" id="detailHotelName">Hotel Name</div>
+          <div class="detail-hotel-location"><i class="fas fa-map-marker-alt"></i> <span id="detailHotelLocation">Loc</span></div>
+        </div>
+        <div style="text-align:right">
+          <div class="detail-price" id="detailPriceHero">$0</div>
+          <div style="color:white; font-size:12px">per night</div>
+        </div>
+      </div>
+    </div>
+    <div class="detail-content">
+      <div class="detail-main">
+        <h2 class="detail-section-title">About This Property</h2>
+        <p class="detail-desc" id="detailDesc"></p>
+        <h2 class="detail-section-title">Amenities</h2>
+        <div class="detail-amenities-grid" id="detailAmenities"></div>
+        <h2 class="detail-section-title">Gallery</h2>
+        <div class="room-gallery" id="detailRoomGallery"></div>
+        <h2 class="detail-section-title">Upcoming Events</h2>
+        <div id="detailEvents"></div>
+        <h2 class="detail-section-title">Reviews</h2>
+        <div id="detailReviews"></div>
+      </div>
+      <aside class="detail-sidebar">
+        <div class="booking-card">
+          <div class="booking-card-title">Book Your Stay</div>
+          <!-- Corporate Notice -->
+          <div id="corporateBookingNotice" style="display:none; background:var(--light-teal); padding:12px; margin-bottom:15px; border-radius:10px; font-size:12px; color:var(--deep-teal)">
+             <i class="fas fa-building"></i> <strong>Business Partner Special:</strong> 15% bulk discount applied for groups of 10+.
+          </div>
+          <div class="date-picker-row">
+            <div class="form-group">
+              <label class="form-label">Check-in</label>
+              <input type="date" class="form-input" id="bookCheckin" onchange="updateBookingSummary()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Check-out</label>
+              <input type="date" class="form-input" id="bookCheckout" onchange="updateBookingSummary()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rooms</label>
+            <select class="form-select" id="bookRooms" onchange="updateBookingSummary()">
+              <option value="1">1 Room</option><option value="2">2 Rooms</option><option value="3">3 Rooms</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Guests</label>
+            <select class="form-select" id="bookGuests" onchange="checkCorporateBookFields()">
+              <option value="2">2 Guests</option>
+              <option value="4">4 Guests</option>
+              <option value="10">10 Guests (Bulk)</option>
+              <option value="20">20+ Guests (Group)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Loyalty Number</label>
+            <input class="form-input" placeholder="LYL-XXX" id="loyaltyNumber" oninput="updateBookingSummary()">
+          </div>
+          <div class="booking-summary">
+            <div class="summary-row"><span>Stay Total</span><span id="summarySubtotal">$0</span></div>
+            <div class="summary-row" id="loyaltyDiscountRow" style="display:none"><span>Discounts</span><span id="summaryDiscount" style="color:var(--deep-teal)">-$0</span></div>
+            <div class="summary-row"><span>Tax (10%)</span><span id="summaryTax">$0</span></div>
+            <div class="summary-row total"><span>Total</span><span id="summaryTotal">$0</span></div>
+          </div>
+          <button class="btn-book-now" onclick="proceedToBook()">Complete Booking</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- ======================== AUTH PAGES ======================== -->
+<main class="page" id="page-login">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">✈ TravelBooker</div>
+        <h2 class="auth-title" id="loginTitle">Welcome Back</h2>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-personal" onclick="switchLoginType('personal')">Individual Traveller</button>
+        <button class="auth-tab" id="tab-corporate" onclick="switchLoginType('corporate')">Business Partner</button>
+      </div>
+      <div id="loginStep1">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <div class="input-icon-wrap"><i class="fas fa-envelope"></i><input class="form-input" type="email" id="loginEmail" placeholder="your@email.com"></div>
+        </div>
+        <div class="form-group" id="personalLoginFields">
+          <label class="form-label">Password</label>
+          <div class="input-icon-wrap"><i class="fas fa-lock"></i><input class="form-input" type="password" placeholder="Password"></div>
+        </div>
+        <div class="form-group" id="corporateLoginFields" style="display:none">
+            <label class="form-label">Partner ID</label>
+            <div class="input-icon-wrap"><i class="fas fa-id-card"></i><input class="form-input" placeholder="CRP-XXX"></div>
+        </div>
+        <button class="btn-submit" onclick="completeLogin()">Sign In</button>
+      </div>
+      <!-- OTP Step -->
+      <div id="loginStepOTP" style="display:none">
+        <p style="text-align:center; margin-bottom:20px; font-size:14px">We've sent a 6-digit code to your email.</p>
+        <div class="otp-inputs">
+          <input class="otp-input" maxlength="1" onkeyup="moveOTP(this)">
+          <input class="otp-input" maxlength="1" onkeyup="moveOTP(this)">
+          <input class="otp-input" maxlength="1" onkeyup="moveOTP(this)">
+          <input class="otp-input" maxlength="1" onkeyup="moveOTP(this)">
+          <input class="otp-input" maxlength="1" onkeyup="moveOTP(this)">
+          <input class="otp-input" maxlength="1" onkeyup="moveOTP(this)">
+        </div>
+        <button class="btn-submit" onclick="verifyOTP()">Verify & Login</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<main class="page" id="page-signup">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">✈ TravelBooker</div>
+        <h2 class="auth-title">Create Account</h2>
+      </div>
+      <!-- Step 1: Personal -->
+      <div id="signupStep1">
+        <div class="form-group"><label class="form-label">First Name</label><input class="form-input" id="suFirstName" placeholder="John"></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="suLastName" placeholder="Fernando"></div>
+        <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="suEmail" type="email" placeholder="john@example.com"></div>
+        <div class="form-group">
+          <label class="form-label">User Category</label>
+          <select class="form-select" id="suUserType">
+            <option value="tourist">Individual Traveler</option>
+            <option value="family">Family Traveler</option>
+            <option value="corporate">Business Partner</option>
+          </select>
+        </div>
+        <button class="btn-submit" onclick="signupNextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <!-- Step 2: Password & Captcha -->
+      <div id="signupStep2" style="display:none">
+        <div class="form-group"><label class="form-label">Create Password</label><input class="form-input" type="password" placeholder="Min 8 characters"></div>
+        <div class="captcha-box" onclick="verifyCaptcha()">
+          <div class="captcha-check"></div>
+          <div>I'm not a robot</div>
+          <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" style="width:24px;margin-left:auto">
+        </div>
+        <button class="btn-submit" style="margin-top:20px" onclick="signupNextStep()">Final Step <i class="fas fa-arrow-right"></i></button>
+      </div>
+      <!-- Step 3: Verification -->
+      <div id="signupStep3" style="display:none">
+        <div style="text-align:center; padding:20px 0">
+           <i class="fas fa-paper-plane" style="font-size:48px; color:var(--gold); margin-bottom:20px"></i>
+           <h3>Verify Your Email</h3>
+           <p style="font-size:14px; color:var(--text-light); margin-top:10px">We've sent a link to your email. Click it to activate your account.</p>
+        </div>
+        <button class="btn-submit" onclick="completeSignup()">Finish & Explores</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ======================== MODALS ======================== -->
+<div class="modal-overlay" id="emailModal">
+    <div class="modal-card">
+        <div class="modal-close" onclick="closeModal('emailModal')"><i class="fas fa-times"></i></div>
+        <div style="padding:40px">
+            <h3 style="font-family:var(--font-display); font-size:24px; margin-bottom:6px">Send Us a Message</h3>
+            <p style="font-size:14px; color:var(--text-light); margin-bottom:24px">We typically respond within 2 hours.</p>
+            <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Describe your question..."></textarea></div>
+            <button class="btn-submit" onclick="closeModal('emailModal'); showToast('Message Sent!')">Send Message</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="pkgDetailModal">
+    <div class="modal-card">
+        <div class="modal-close" onclick="closeModal('pkgDetailModal')"><i class="fas fa-times"></i></div>
+        <div id="pkgDetailContent" style="padding:40px"></div>
+    </div>
+</div>
+<!-- ======================== TOAST ======================== -->
+<div id="toast" style="position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:var(--navy); color:white; padding:12px 24px; border-radius:50px; display:none; z-index:5000">
+    <span id="toastMsg"></span>
+</div>
+
+<!-- ======================== CHATBOT ======================== -->
+<button class="chatbot-btn" onclick="toggleChatbot()">💬</button>
+<div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+        <div class="chatbot-avatar">🤖</div>
+        <div>
+            <div class="chatbot-name">Ayu — Assistant</div>
+            <div class="chatbot-status">Online</div>
+        </div>
+        <button class="chatbot-close" onclick="toggleChatbot()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+        <div class="chat-msg chat-msg-bot">
+            <div class="chat-bubble">Ayubowan! 🙏 I'm Ayu. How can I help you discover Sri Lanka today?</div>
+            <div class="chat-suggestions">
+                <button class="chat-suggestion" onclick="chatSend('Best beaches?')">Best Beaches</button>
+                <button class="chat-suggestion" onclick="chatSend('Luxury hotels')">Luxury Hotels</button>
+            </div>
+        </div>
+    </div>
+    <div class="chatbot-input-row">
+        <input class="chatbot-input" id="chatInput" placeholder="Ask Ayu..." onkeypress="if(event.key==='Enter') chatSend()">
+    </div>
+</div>
+
+<!-- ======================== FOOTER ======================== -->
+<footer id="globalFooter">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">✈</div>
+        <span class="nav-logo-text" style="color:white">TravelBooker</span>
+      </div>
+      <p class="footer-desc">Sri Lanka's most trusted travel platform. Connecting travellers since 2020. A product of CodeGen International.</p>
+      <div class="footer-social">
+        <div class="social-btn"><i class="fab fa-facebook-f"></i></div>
+        <div class="social-btn"><i class="fab fa-instagram"></i></div>
+        <div class="social-btn"><i class="fab fa-twitter"></i></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('destinations')">Destinations</a></li>
+        <li><a onclick="showPage('packages')">Packages</a></li>
+        <li><a onclick="showPage('about')">About Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a onclick="showPage('support')">Help Centre</a></li>
+        <li><a onclick="showPage('signup')">Create Account</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 TravelBooker by CodeGen International.</span>
+    <div class="footer-badges">
+      <span class="footer-badge">Privacy Policy</span>
+      <span class="footer-badge">Terms</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
